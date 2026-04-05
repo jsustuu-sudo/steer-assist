@@ -614,7 +614,7 @@ function BookPage({bookings,setBookings,students,setStudents,blocked,go}){
 
   if(step===1)return(
     <div><Hdr/>
-      <div className="sa-page-inner"><div style={{padding:16}}>
+      <div style={{padding:16}}>
         <div style={{background:"#fff",borderRadius:20,padding:20,boxShadow:"0 4px 20px rgba(0,0,0,0.06)"}}>
           <div style={{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:18,fontWeight:800,color:C.navy,marginBottom:4}}>Your Details</div>
           <div style={{fontSize:13,color:C.slate,marginBottom:20}}>We'll use these to confirm your booking</div>
@@ -754,7 +754,7 @@ function BookPage({bookings,setBookings,students,setStudents,blocked,go}){
 
   if(step===3)return(
     <div><Hdr/>
-      <div className="sa-page-inner"><div style={{padding:16}}>
+      <div style={{padding:16}}>
         <div style={{background:"#fff",borderRadius:20,padding:20,boxShadow:"0 4px 20px rgba(0,0,0,0.06)"}}>
           <div style={{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:18,fontWeight:800,color:C.navy,marginBottom:16}}>Confirm Booking</div>
           <div style={{background:C.offwhite,borderRadius:14,padding:16,marginBottom:14}}>
