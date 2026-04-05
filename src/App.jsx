@@ -18,6 +18,10 @@ const C = {
 };
 
 const PASS   = "steerassist2024";
+const FB_URL  = "https://www.facebook.com/people/Steer-Assist-Driving-School/100089471258940/";
+const IG_URL  = "https://www.instagram.com/steerassist/";
+const WA_URL  = "https://wa.me/61474917491";
+const GR_URL  = "https://share.google/zViQvMSEjYmzqNsg7";
 const PHONE  = "0474917491";
 const PHONE_DISPLAY = "0474 917 491";
 const EMAIL  = "info@steerassist.com.au";
@@ -100,48 +104,91 @@ const PACKAGES=[
 const GLOBAL_CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-  body{background:#0A1628;}
-  .sa-app{font-family:'DM Sans',sans-serif;background:#F4F7FB;min-height:100vh;max-width:480px;margin:0 auto;position:relative;overflow-x:hidden;box-shadow:0 0 60px rgba(0,0,0,0.4);}
+  body{background:#0A1628;font-family:'Plus Jakarta Sans',sans-serif;}
+  .sa-app{font-family:'Plus Jakarta Sans',sans-serif;background:#F4F7FB;min-height:100vh;position:relative;overflow-x:hidden;}
   .sa-page{padding-bottom:76px;min-height:100vh;}
-  /* NAV */
-  .sa-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:linear-gradient(180deg,#1B5FA8 0%,#0A1628 100%);display:flex;z-index:200;padding-bottom:env(safe-area-inset-bottom,6px);box-shadow:0 -2px 20px rgba(0,0,0,0.4);}
-  .sa-nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 2px 5px;background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.45);font-size:9px;font-weight:600;font-family:'DM Sans',sans-serif;transition:all 0.2s;letter-spacing:0.3px;}
+  .sa-nav{position:fixed;bottom:0;left:0;width:100%;background:linear-gradient(180deg,#1B5FA8 0%,#0A1628 100%);display:flex;z-index:200;padding-bottom:env(safe-area-inset-bottom,6px);box-shadow:0 -2px 20px rgba(0,0,0,0.4);}
+  .sa-nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 2px 5px;background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.45);font-size:9px;font-weight:600;font-family:'Plus Jakarta Sans',sans-serif;transition:all 0.2s;letter-spacing:0.3px;}
   .sa-nav-btn.active{color:#fff;}
   .sa-nav-btn.active svg{filter:drop-shadow(0 0 6px rgba(91,164,230,0.8));}
   .sa-nav-btn span{margin-top:1px;}
-  /* HERO */
+  .sa-topnav{display:none;position:fixed;top:0;left:0;right:0;z-index:300;background:linear-gradient(90deg,#0A1628 0%,#1B5FA8 100%);box-shadow:0 2px 20px rgba(0,0,0,0.4);padding:0 40px;height:64px;align-items:center;justify-content:space-between;}
+  .sa-topnav-btn{background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.7);font-size:13px;font-weight:600;font-family:'Plus Jakarta Sans',sans-serif;padding:8px 12px;border-radius:8px;transition:all 0.2s;}
+  .sa-topnav-btn:hover{color:#fff;background:rgba(255,255,255,0.1);}
+  .sa-topnav-btn.active{color:#fff;background:rgba(255,255,255,0.15);}
+  .sa-topnav-cta{background:linear-gradient(135deg,#F5A623,#E8920A);border:none;cursor:pointer;color:#0A1628;font-size:13px;font-weight:800;font-family:'Plus Jakarta Sans',sans-serif;padding:9px 20px;border-radius:10px;transition:all 0.2s;}
+  .sa-topnav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(245,166,35,0.4);}
+  @media(min-width:768px){
+    .sa-app{max-width:100%;}
+    .sa-hero-inner{max-width:960px;margin:0 auto;}
+    .sa-stats-grid{max-width:900px;margin:20px auto 0!important;}
+    .sa-section-wrap{max-width:900px;margin:0 auto;padding:0 32px;}
+    .sa-pkg-track{justify-content:center!important;}
+    .sa-features-grid{grid-template-columns:repeat(2,1fr)!important;}
+  }
+  @media(min-width:1024px){
+    .sa-page{padding-bottom:0!important;padding-top:64px;}
+    .sa-nav{display:none!important;}
+    .sa-topnav{display:flex!important;}
+    .sa-hero-inner{max-width:1200px;padding:60px 60px 0!important;display:grid!important;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+    .sa-stats-grid{max-width:1200px;margin:32px auto 0!important;border-radius:20px!important;}
+    .sa-section-wrap{max-width:1200px;margin:0 auto;padding:0 60px!important;}
+    .sa-pkg-track{gap:24px!important;}
+    .sa-pkg-card{width:320px!important;}
+    .sa-features-grid{grid-template-columns:repeat(4,1fr)!important;}
+    .sa-page-inner{max-width:900px;margin:0 auto;padding:0 40px;}
+  }
   @keyframes roadMove{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
   @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-  @keyframes slideIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
   @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
-  .hero-road{animation:roadMove 6s linear infinite;}
+  @keyframes slideOut{from{width:0;opacity:0}to{width:170px;opacity:1}}
+  @keyframes swipeHint{0%{transform:translateX(0);opacity:1}50%{transform:translateX(-8px);opacity:0.5}100%{transform:translateX(0);opacity:1}}
+  .hero-road{animation:roadMove 5s linear infinite;}
   .fade-up{animation:fadeUp 0.6s ease both;}
   .fade-up-1{animation-delay:0.1s;}
   .fade-up-2{animation-delay:0.2s;}
   .fade-up-3{animation-delay:0.3s;}
-  .fade-up-4{animation-delay:0.4s;}
-  /* CARDS */
-  .pkg-card{transition:transform 0.2s,box-shadow 0.2s;}
-  .pkg-card:active{transform:scale(0.97);}
-  /* FAQ */
-  .faq-answer{overflow:hidden;transition:max-height 0.35s ease,opacity 0.3s ease;}
-  /* PHONE PILL */
-  @keyframes slideOut{from{width:0;opacity:0}to{width:160px;opacity:1}}
+  .shimmer-badge{background:linear-gradient(90deg,#F5A623 25%,#FFD07B 50%,#F5A623 75%);background-size:200% 100%;animation:shimmer 2s infinite;}
   .phone-pill{animation:slideOut 0.3s ease forwards;}
-  /* SLOT BUTTON */
+  .swipe-hint{animation:swipeHint 2s ease 1.5s 2;}
+  .pkg-card{transition:transform 0.2s,box-shadow 0.2s;}
+  .pkg-card:hover{transform:translateY(-4px);}
+  .pkg-card:active{transform:scale(0.97);}
+  .faq-answer{overflow:hidden;transition:max-height 0.35s ease,opacity 0.3s ease;}
   .slot-btn{transition:background 0.15s,transform 0.1s;}
   .slot-btn:active:not(:disabled){transform:scale(0.92);}
-  /* SWIPE HINT */
-  @keyframes swipeHint{0%{transform:translateX(0);opacity:1}50%{transform:translateX(-8px);opacity:0.5}100%{transform:translateX(0);opacity:1}}
-  .swipe-hint{animation:swipeHint 2s ease 1.5s 2;}
-  /* INPUT FOCUS */
   .sa-input:focus{border-color:#2E86DE!important;outline:none;box-shadow:0 0 0 3px rgba(46,134,222,0.15);}
-  /* SHIMMER BADGE */
-  .shimmer-badge{background:linear-gradient(90deg,#F5A623 25%,#FFD07B 50%,#F5A623 75%);background-size:200% 100%;animation:shimmer 2s infinite;}
 `;
 
-// ─── ICON ─────────────────────────────────────────────────────────────────────
+// Brand social icon components
+const IgIcon=({size=24})=>(
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs><radialGradient id="ig-g" cx="30%" cy="107%" r="150%"><stop offset="0%" stopColor="#fdf497"/><stop offset="5%" stopColor="#fdf497"/><stop offset="45%" stopColor="#fd5949"/><stop offset="60%" stopColor="#d6249f"/><stop offset="90%" stopColor="#285AEB"/></radialGradient></defs>
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="url(#ig-g)"/>
+    <circle cx="12" cy="12" r="4.5" fill="none" stroke="white" strokeWidth="1.8"/>
+    <circle cx="17.5" cy="6.5" r="1.2" fill="white"/>
+  </svg>
+);
+const FbIcon=({size=24})=>(
+  <svg width={size} height={size} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <rect width="24" height="24" rx="5" fill="#1877F2"/>
+    <path d="M16 8h-2a1 1 0 0 0-1 1v2h3l-.5 3H13v7h-3v-7H8v-3h2V9a4 4 0 0 1 4-4h2v3z" fill="white"/>
+  </svg>
+);
+const WaIcon=({size=24})=>(
+  <svg width={size} height={size} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <rect width="24" height="24" rx="5" fill="#25D366"/>
+    <path d="M12 4a8 8 0 0 0-6.93 11.97L4 20l4.17-1.03A8 8 0 1 0 12 4zm4.12 10.88c-.18.5-1.04.96-1.44 1.02-.37.05-.84.07-1.35-.08-.51-.16-.84-.32-1.22-.45a9.55 9.55 0 0 1-3.3-2.92c-.46-.6-.77-1.3-.77-2.02 0-.7.27-1.3.74-1.77.15-.16.32-.2.43-.2h.32c.1 0 .24-.04.37.28.14.33.47 1.14.51 1.22.04.08.07.18.01.29-.06.1-.09.17-.18.26-.09.1-.19.21-.27.28-.09.08-.18.17-.08.33.1.16.46.76.99 1.23.68.6 1.25.79 1.43.87.18.09.28.07.38-.04.1-.1.44-.51.56-.69.12-.17.24-.14.4-.08.16.06 1.02.48 1.2.57.17.08.29.13.33.2.04.07.04.42-.14.92z" fill="white"/>
+  </svg>
+);
+const GgIcon=({size=24})=>(
+  <svg width={size} height={size} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <rect width="24" height="24" rx="5" fill="white"/>
+    <path d="M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27 3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10 5.35 0 9.25-3.67 9.25-9.09 0-1.15-.15-1.81-.15-1.81z" fill="#4285F4"/>
+  </svg>
+);
+
+ ─────────────────────────────────────────────────────────────────────
 const I = ({n,s=20,c="currentColor",fw=2})=>{
   const P={
     home:"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z M9 22V12h6v10",
@@ -214,11 +261,32 @@ export default function SteerAssist(){
     :{id:"login",l:"Login",n:"lock"};
 
   const go=p=>{ setPage(p); window.scrollTo(0,0); };
+  const deskNav=isInst
+    ?[{id:"dashboard",l:"Dashboard"},{id:"diary",l:"Diary"},{id:"students",l:"Students"},{id:"achieve",l:"Achievements"}]
+    :[{id:"home",l:"Home"},{id:"book",l:"Book a Lesson"},{id:"mybookings",l:"My Bookings"},{id:"progress",l:"Progress"},{id:"reviews",l:"Reviews"},{id:"contact",l:"Contact"},{id:"faq",l:"FAQ"}];
 
   return(
     <>
       <style>{GLOBAL_CSS}</style>
       <div className="sa-app">
+        <nav className="sa-topnav">
+          <button onClick={()=>go("home")} style={{background:"none",border:"none",cursor:"pointer",display:"flex",alignItems:"center",gap:12}}>
+            <Logo size={36}/>
+            <div style={{textAlign:"left"}}>
+              <div style={{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:16,fontWeight:800,color:"#fff",lineHeight:1}}>Steer Assist</div>
+              <div style={{fontSize:10,color:"rgba(255,255,255,0.5)"}}>South East Melbourne</div>
+            </div>
+          </button>
+          <div style={{display:"flex",alignItems:"center",gap:4}}>
+            {deskNav.map(item=>(
+              <button key={item.id} className={`sa-topnav-btn${page===item.id?" active":""}`} onClick={()=>go(item.id)}>{item.l}</button>
+            ))}
+            {isInst
+              ?<button className="sa-topnav-btn" onClick={()=>{setIsInst(false);go("home");}}>Logout</button>
+              :<button className="sa-topnav-cta" onClick={()=>go("login")}>Instructor Login</button>
+            }
+          </div>
+        </nav>
         <div className="sa-page">
           {page==="home"     && <HomePage     go={go} tests={tests} />}
           {page==="book"     && <BookPage     bookings={bookings} setBookings={setBookings} students={students} setStudents={setStudents} blocked={blocked} go={go}/>}
@@ -342,7 +410,7 @@ function HomePage({go,tests}){
       </div>
 
       {/* Stats strip */}
-      <div style={{background:"#fff",display:"grid",gridTemplateColumns:"repeat(4,1fr)",margin:"16px 16px 0",borderRadius:16,boxShadow:"0 4px 24px rgba(10,22,40,0.1)",overflow:"hidden"}}>
+      <div className="sa-stats-grid" style={{background:"#fff",display:"grid",gridTemplateColumns:"repeat(4,1fr)",margin:"16px 16px 0",borderRadius:16,boxShadow:"0 4px 24px rgba(10,22,40,0.1)",overflow:"hidden"}}>
         {[["2,500+","Students"],["100%","Pass Rate"],["5+","Yrs Exp"],["2,500+","Tests"]].map(([n,l],i)=>(
           <div key={l} style={{textAlign:"center",padding:"14px 4px",borderRight:i<3?"1px solid #F1F5F9":"none"}}>
             <div style={{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:17,fontWeight:800,color:C.brand}}>{n}</div>
@@ -381,9 +449,9 @@ function HomePage({go,tests}){
         <div style={{fontSize:13,color:C.slate,marginBottom:16}}>Contact us for pricing — we tailor to your needs</div>
       </div>
       <div style={{overflowX:"auto",WebkitOverflowScrolling:"touch",paddingLeft:20,paddingRight:20,paddingBottom:16,paddingTop:16}}>
-        <div style={{display:"flex",gap:14,width:"max-content"}}>
+        <div className="sa-pkg-track" style={{display:"flex",gap:14,width:"max-content"}}>
           {PACKAGES.map(p=>(
-            <div key={p.id} className="pkg-card" style={{width:220,background:"#fff",borderRadius:20,padding:"24px 20px 20px",boxShadow:p.popular?"0 8px 32px rgba(46,134,222,0.2)":"0 4px 16px rgba(0,0,0,0.06)",border:p.popular?`2px solid ${C.brand}`:"2px solid transparent",position:"relative",flexShrink:0,marginTop:p.popular?16:0}}>
+            <div key={p.id} className="pkg-card sa-pkg-card" style={{width:220,background:"#fff",borderRadius:20,padding:"24px 20px 20px",boxShadow:p.popular?"0 8px 32px rgba(46,134,222,0.2)":"0 4px 16px rgba(0,0,0,0.06)",border:p.popular?`2px solid ${C.brand}`:"2px solid transparent",position:"relative",flexShrink:0,marginTop:p.popular?16:0}}>
               {p.popular&&<div style={{position:"absolute",top:-12,left:"50%",transform:"translateX(-50%)",background:`linear-gradient(135deg,${C.brand},${C.navy})`,color:"#fff",fontSize:10,fontWeight:800,padding:"4px 14px",borderRadius:20,whiteSpace:"nowrap",letterSpacing:0.5}}>MOST POPULAR</div>}
               <div style={{fontSize:32,marginBottom:8}}>{p.icon}</div>
               <div style={{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:17,fontWeight:800,color:C.navy,marginBottom:4}}>{p.name}</div>
@@ -464,13 +532,17 @@ function HomePage({go,tests}){
         </div>
       </div>
 
-      {/* Social */}
-      <div style={{margin:"16px 16px 24px",display:"flex",gap:12}}>
-        {[["ig","#E1306C","Instagram"],["fb","#1877F2","Facebook"]].map(([icon,col,label])=>(
-          <a key={icon} href="#" style={{flex:1,display:"flex",alignItems:"center",justifyContent:"center",gap:8,padding:"12px",background:col,borderRadius:14,color:"#fff",textDecoration:"none",fontWeight:700,fontSize:13,fontFamily:"'DM Sans',sans-serif"}}>
-            <I n={icon} s={16} c="#fff"/> {label}
-          </a>
-        ))}
+      {/* Social + WhatsApp */}
+      <div style={{margin:"16px 16px 24px",display:"flex",gap:10}}>
+        <a href={IG_URL} target="_blank" rel="noopener noreferrer" style={{flex:1,display:"flex",alignItems:"center",justifyContent:"center",gap:6,padding:"11px 6px",background:"linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)",borderRadius:14,color:"#fff",textDecoration:"none",fontWeight:700,fontSize:12,fontFamily:"'Plus Jakarta Sans',sans-serif"}}>
+          <IgIcon size={17}/> Instagram
+        </a>
+        <a href={FB_URL} target="_blank" rel="noopener noreferrer" style={{flex:1,display:"flex",alignItems:"center",justifyContent:"center",gap:6,padding:"11px 6px",background:"#1877F2",borderRadius:14,color:"#fff",textDecoration:"none",fontWeight:700,fontSize:12,fontFamily:"'Plus Jakarta Sans',sans-serif"}}>
+          <FbIcon size={17}/> Facebook
+        </a>
+        <a href={WA_URL} target="_blank" rel="noopener noreferrer" style={{flex:1,display:"flex",alignItems:"center",justifyContent:"center",gap:6,padding:"11px 6px",background:"#25D366",borderRadius:14,color:"#fff",textDecoration:"none",fontWeight:700,fontSize:12,fontFamily:"'Plus Jakarta Sans',sans-serif"}}>
+          <WaIcon size={17}/> WhatsApp
+        </a>
       </div>
     </div>
   );
@@ -542,7 +614,7 @@ function BookPage({bookings,setBookings,students,setStudents,blocked,go}){
 
   if(step===1)return(
     <div><Hdr/>
-      <div style={{padding:16}}>
+      <div className="sa-page-inner"><div style={{padding:16}}>
         <div style={{background:"#fff",borderRadius:20,padding:20,boxShadow:"0 4px 20px rgba(0,0,0,0.06)"}}>
           <div style={{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:18,fontWeight:800,color:C.navy,marginBottom:4}}>Your Details</div>
           <div style={{fontSize:13,color:C.slate,marginBottom:20}}>We'll use these to confirm your booking</div>
@@ -682,7 +754,7 @@ function BookPage({bookings,setBookings,students,setStudents,blocked,go}){
 
   if(step===3)return(
     <div><Hdr/>
-      <div style={{padding:16}}>
+      <div className="sa-page-inner"><div style={{padding:16}}>
         <div style={{background:"#fff",borderRadius:20,padding:20,boxShadow:"0 4px 20px rgba(0,0,0,0.06)"}}>
           <div style={{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:18,fontWeight:800,color:C.navy,marginBottom:16}}>Confirm Booking</div>
           <div style={{background:C.offwhite,borderRadius:14,padding:16,marginBottom:14}}>
@@ -849,10 +921,11 @@ function ReviewsPage({tests}){
             <p style={{fontSize:13,color:C.slate,marginTop:8,fontStyle:"italic"}}>"{r.text}"</p>
           </div>
         ))}
-        <div style={{display:"flex",gap:10,marginTop:4}}>
-          {[["ig","#E1306C","@steerassist"],["fb","#1877F2","Steer Assist"]].map(([ic,col,label])=>(
-            <a key={ic} href="#" style={{flex:1,display:"flex",alignItems:"center",justifyContent:"center",gap:8,padding:"12px",background:col,borderRadius:14,color:"#fff",textDecoration:"none",fontWeight:700,fontSize:13,fontFamily:"'DM Sans',sans-serif"}}><I n={ic} s={15} c="#fff"/> {label}</a>
-          ))}
+        <div style={{display:"flex",gap:8,marginTop:4,flexWrap:"wrap"}}>
+          <a href={IG_URL} target="_blank" rel="noopener noreferrer" style={{flex:1,minWidth:90,display:"flex",alignItems:"center",justifyContent:"center",gap:6,padding:"10px 6px",background:"linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)",borderRadius:12,color:"#fff",textDecoration:"none",fontWeight:700,fontSize:11,fontFamily:"'Plus Jakarta Sans',sans-serif"}}><IgIcon size={15}/> Instagram</a>
+          <a href={FB_URL} target="_blank" rel="noopener noreferrer" style={{flex:1,minWidth:90,display:"flex",alignItems:"center",justifyContent:"center",gap:6,padding:"10px 6px",background:"#1877F2",borderRadius:12,color:"#fff",textDecoration:"none",fontWeight:700,fontSize:11,fontFamily:"'Plus Jakarta Sans',sans-serif"}}><FbIcon size={15}/> Facebook</a>
+          <a href={WA_URL} target="_blank" rel="noopener noreferrer" style={{flex:1,minWidth:90,display:"flex",alignItems:"center",justifyContent:"center",gap:6,padding:"10px 6px",background:"#25D366",borderRadius:12,color:"#fff",textDecoration:"none",fontWeight:700,fontSize:11,fontFamily:"'Plus Jakarta Sans',sans-serif"}}><WaIcon size={15}/> WhatsApp</a>
+          <a href={GR_URL} target="_blank" rel="noopener noreferrer" style={{flex:1,minWidth:90,display:"flex",alignItems:"center",justifyContent:"center",gap:6,padding:"10px 6px",background:"#fff",border:"1.5px solid #E2E8F0",borderRadius:12,color:"#4285F4",textDecoration:"none",fontWeight:700,fontSize:11,fontFamily:"'Plus Jakarta Sans',sans-serif"}}><GgIcon size={15}/> Google</a>
         </div>
       </div>
     </div>
