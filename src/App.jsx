@@ -144,7 +144,7 @@ paths.map(function(p,i){ return React.createElement(“path”, {key:i, d:i===0?
 
 function Stars(props) {
 var n=props.n||5, size=props.size||14;
-return React.createElement(“span”, {style:{color:GD,fontSize:size}}, “★”.repeat(n)+“☆”.repeat(5-n));
+return React.createElement(“span”, {style:{color:GD,fontSize:size}}, “\u2605”.repeat(n)+”\u2606”.repeat(5-n));
 }
 
 function Logo(props) {
