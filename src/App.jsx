@@ -22,9 +22,10 @@ var TOPICS = ["Cockpit checks","Moving off & stopping","Steering control","Gears
 var HRS = Array.from({length:14}, function(_,i){ return i+7; });
 var DNAMES = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
 var PKGS = [
-  {id:"p1", name:"Single Lesson", ico:"1", desc:"Perfect for a trial or top-up session.", feats:["1 hour lesson","Pick-up & drop-off","Personalised feedback"], pop:false},
-  {id:"p2", name:"5-Lesson Pack", ico:"5", desc:"Great starter pack. Build core skills.", feats:["5 x 1 hour lessons","Pick-up & drop-off","Progress tracking","Topic checklist"], pop:false},
-  {id:"p3", name:"10-Lesson Pack", ico:"10", desc:"Best value. Aimed at first-time pass.", feats:["10 x 1 hour lessons","Pick-up & drop-off","Full progress tracking","Exam readiness check","Test prep session"], pop:true},
+  {id:"p1", name:"Single Lesson", ico:"1", desc:"Perfect for a trial or top-up.", feats:["1 hour lesson","Pick-up & drop-off","Personalised feedback"], pop:false, aPrice:70, aOld:75, mPrice:80, mOld:85},
+  {id:"p2", name:"5-Lesson Pack", ico:"5", desc:"Build core skills.", feats:["5 x 1 hour lessons","Pick-up & drop-off","Progress tracking","Topic checklist"], pop:false, aPrice:300, aOld:325, mPrice:310, mOld:335},
+  {id:"p3", name:"10-Lesson Pack", ico:"10", desc:"Best value. First-time pass focus.", feats:["10 x 1 hour lessons","Pick-up & drop-off","Full progress tracking","Exam readiness check","Test prep session"], pop:true, aPrice:600, aOld:650, mPrice:610, mOld:660},
+  {id:"p4", name:"Test Package", ico:"T", desc:"1 hour lesson + test in our car.", feats:["1 hour pre-test lesson","Use our dual-control car","Instructor on test day","Pick-up & drop-off"], pop:false, aPrice:240, aOld:250, mPrice:250, mOld:260},
 ];
 var FAQS = [
   {q:"How many lessons do I need?", a:"It depends on your experience. Most learners need 10-20 hours with a professional instructor. We will assess you in your first lesson."},
@@ -108,7 +109,7 @@ var CSS = [
   ".pkgc:hover{transform:translateY(-3px);}",
   ".faqb{overflow:hidden;transition:max-height 0.3s ease,opacity 0.3s ease;}",
   ".si:focus{border-color:#2E86DE!important;outline:none;box-shadow:0 0 0 3px rgba(46,134,222,0.15);}",
-  ".slb{transition:background 0.15s;}"
+  ".slb{transition:background 0.15s;}.pkgbtn{transition:all 0.25s ease;background:linear-gradient(135deg,#F5A623,#E8920A);border:none!important;color:#0A1628!important;}.pkgbtn:hover{background:linear-gradient(135deg,#2E86DE,#0A1628)!important;color:#fff!important;}"
 ].join("");
 
 function Ico(props) {
@@ -291,7 +292,7 @@ export default function App() {
           page==="students"   && isInst && React.createElement(StusPage,  {stus:stus, setStus:setStus, bks:bks}),
           page==="achieve"    && isInst && React.createElement(AchvPage,  {tests:tests, setTests:setTests})
         ),
-        React.createElement("div", {style:{position:"fixed",bottom:86,right:16,zIndex:300,display:"flex",alignItems:"center",gap:8}},
+        React.createElement("div", {style:{position:"fixed",bottom:170,right:16,zIndex:300,display:"flex",alignItems:"center",gap:8}},
           phoneOpen && React.createElement("a", {href:"tel:"+PHONE, className:"ppill",
             style:{display:"flex",alignItems:"center",gap:8,background:GR,borderRadius:24,padding:"10px 16px",color:"#fff",textDecoration:"none",fontWeight:700,fontSize:14,boxShadow:"0 4px 20px rgba(16,185,129,0.4)",whiteSpace:"nowrap",fontFamily:"'Plus Jakarta Sans',sans-serif"}},
             React.createElement(Ico, {n:"phone",sz:16,c:"#fff"}), " ", PHONED
@@ -316,6 +317,162 @@ export default function App() {
             React.createElement("span", null, xnav.l)
           )
         )
+      )
+    )
+  );
+}
+
+
+function CarSection() {
+  var CAR_URL = "https://cdn.rotorint.com/Corolla/2025_09_Sep/e/360/png/lo/907x510/SPN_AUS_0103U9FA204E25120A0_comp_004.png";
+  return React.createElement("div", {style:{background:"#F0F4FF",position:"relative",overflow:"hidden",borderBottom:"1px solid #E2E8F0"}},
+    React.createElement("div", {style:{position:"absolute",top:0,left:0,right:0,height:4,background:"linear-gradient(90deg,"+B+","+NV+")"}}),
+    React.createElement("div", {style:{padding:"28px 20px 0",position:"relative",zIndex:2}},
+      React.createElement("div", {style:{display:"flex",alignItems:"center",gap:10,marginBottom:6}},
+        React.createElement(Logo, {size:32}),
+        React.createElement("div", {style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:11,fontWeight:700,color:B,letterSpacing:2,textTransform:"uppercase"}}, "Steer Assist Driving School")
+      ),
+      React.createElement("h2", {style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:22,fontWeight:800,color:NV,lineHeight:1.2,marginBottom:6}},
+        "Welcome to ", React.createElement("span", {style:{color:B}}, "Steer Assist")
+      ),
+      React.createElement("p", {style:{fontSize:13,color:SL,lineHeight:1.6,marginBottom:14,maxWidth:300}},
+        "Learn in our modern dual-control Toyota Corolla with an Ex-VicRoads licence testing officer by your side."
+      ),
+      React.createElement("div", {style:{display:"flex",flexWrap:"wrap",gap:8,marginBottom:0}},
+        [["Dual Control","shield",B],["Modern Car","award",GD],["Auto & Manual","check",GR]].map(function(row){
+          return React.createElement("div", {key:row[0], style:{display:"inline-flex",alignItems:"center",gap:5,padding:"5px 10px",background:row[2]+"15",borderRadius:20,border:"1px solid "+row[2]+"40"}},
+            React.createElement(Ico, {n:row[1],sz:13,c:row[2]}),
+            React.createElement("span", {style:{fontSize:11,fontWeight:700,color:row[2]}}, row[0])
+          );
+        })
+      )
+    ),
+    React.createElement("div", {style:{position:"relative",height:220,marginTop:10,overflow:"hidden",display:"flex",alignItems:"flex-end",justifyContent:"center"}},
+      React.createElement("div", {
+        style:{
+          width:"100%",height:"100%",
+          backgroundImage:"url("+CAR_URL+")",
+          backgroundSize:"contain",
+          backgroundPosition:"center bottom",
+          backgroundRepeat:"no-repeat",
+          position:"absolute",bottom:0,left:0,right:0
+        }
+      }),
+      React.createElement("div", {style:{position:"absolute",top:16,right:16,display:"flex",alignItems:"center",gap:6,background:"rgba(255,255,255,0.92)",borderRadius:10,padding:"6px 10px",border:"1px solid #E2E8F0",boxShadow:"0 2px 8px rgba(0,0,0,0.1)",zIndex:3}},
+        React.createElement(Logo, {size:20}),
+        React.createElement("span", {style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:10,fontWeight:800,color:NV}}, "Steer Assist")
+      ),
+      React.createElement("div", {style:{position:"absolute",bottom:0,left:0,right:0,height:50,background:"linear-gradient(to top,#F0F4FF 0%,transparent 100%)",zIndex:2}})
+    )
+  );
+}
+
+function PkgsSection(props) {
+  var go = props.go;
+  var r = React.useState("auto"); var mode=r[0]; var setMode=r[1];
+  return React.createElement("div", {style:{padding:"0 0 4px"}},
+    React.createElement("div", {style:{padding:"0 20px",marginBottom:16}},
+      React.createElement("div", {style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:20,fontWeight:800,color:NV,marginBottom:4}}, "Lesson Packages"),
+      React.createElement("div", {style:{fontSize:13,color:SL,marginBottom:16}}, "Transparent pricing - no hidden fees"),
+      React.createElement("div", {style:{display:"flex",justifyContent:"center"}},
+        React.createElement("div", {style:{display:"inline-flex",background:"#E8F0FE",borderRadius:30,padding:3,gap:2}},
+          ["auto","manual"].map(function(m){
+            var active = mode===m;
+            return React.createElement("button", {key:m, onClick:function(){ setMode(m); },
+              style:{padding:"8px 24px",borderRadius:26,border:"none",cursor:"pointer",fontWeight:700,fontSize:13,fontFamily:"'Plus Jakarta Sans',sans-serif",transition:"all 0.2s",
+                background:active?"linear-gradient(135deg,"+B+","+NV+")":"transparent",
+                color:active?"#fff":SL,
+                boxShadow:active?"0 2px 8px rgba(46,134,222,0.35)":"none"}},
+              m==="auto"?"Automatic":"Manual"
+            );
+          })
+        )
+      )
+    ),
+    React.createElement("div", {style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,padding:"20px 16px 0",alignItems:"stretch",gridAutoRows:"1fr"}},
+      PKGS.map(function(p){
+        var price = mode==="auto" ? p.aPrice : p.mPrice;
+        var oldPrice = mode==="auto" ? p.aOld : p.mOld;
+        return React.createElement("div", {key:p.id, className:"pkgc",
+          style:{background:"#fff",borderRadius:20,padding:"18px 14px 16px",
+            boxShadow:p.pop?"0 8px 32px rgba(46,134,222,0.2)":"0 4px 16px rgba(0,0,0,0.06)",
+            border:p.pop?"2px solid "+B:"2px solid #F1F5F9",
+            position:"relative",display:"flex",flexDirection:"column"}},
+          p.pop && React.createElement("div", {style:{position:"absolute",top:10,right:10,background:"linear-gradient(135deg,"+B+","+NV+")",color:"#fff",fontSize:9,fontWeight:800,padding:"3px 10px",borderRadius:20,whiteSpace:"nowrap"}}, "POPULAR"),
+
+          React.createElement("div", {style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:14,fontWeight:800,color:NV,marginBottom:4}}, p.name),
+          React.createElement("div", {style:{display:"flex",alignItems:"baseline",gap:4,marginBottom:6}},
+            React.createElement("span", {style:{textDecoration:"line-through",color:MT,fontSize:11}}, "$"+oldPrice),
+            React.createElement("span", {style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:20,fontWeight:800,color:p.pop?B:NV}}, "$"+price)
+          ),
+          React.createElement("div", {style:{fontSize:11,color:SL,lineHeight:1.4,marginBottom:10}}, p.desc),
+          React.createElement("div", {style:{flex:1,marginBottom:12,minHeight:90}},
+            p.feats.map(function(f){
+              return React.createElement("div", {key:f, style:{display:"flex",alignItems:"flex-start",gap:5,marginBottom:4}},
+                React.createElement("div", {style:{width:14,height:14,borderRadius:"50%",background:GR+"20",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,marginTop:1}},
+                  React.createElement(Ico, {n:"check",sz:9,c:GR,sw:3})
+                ),
+                React.createElement("span", {style:{fontSize:11,color:SL}}, f)
+              );
+            })
+          ),
+          React.createElement("button", {
+            className:"pkgbtn",
+            onClick:function(){ go("contact"); },
+            style:{width:"100%",padding:"9px 8px",borderRadius:10,cursor:"pointer",fontWeight:700,fontSize:12,fontFamily:"'Plus Jakarta Sans',sans-serif"}},
+            "Enquire Now"
+          )
+        );
+      })
+    ),
+    React.createElement("div", {style:{margin:"14px 16px 8px",padding:"12px 16px",background:"#EFF6FF",borderRadius:14,display:"flex",alignItems:"flex-start",gap:8}},
+      React.createElement(Ico, {n:"qm",sz:15,c:B}),
+      React.createElement("span", {style:{fontSize:12,color:BL,lineHeight:1.6}}, "We can also alter the packages according to your need. Please call or message us for more info.")
+    )
+  );
+}
+
+function VicRoadsSection() {
+  var PDF_URL = "https://www.vicroads.vic.gov.au/~/media/files/formsandpublications/licences/driving_instructors_drive_test_criteria.pdf";
+  var CAR_IMG = "https://cdn.rotorint.com/Corolla/2025_09_Sep/e/360/png/lo/907x510/SPN_AUS_0103U9FA204E25120A0_comp_004.png";
+  return React.createElement("div", {style:{margin:"20px 16px 0"}},
+    React.createElement("div", {style:{background:"linear-gradient(135deg,#F5A623 0%,#E8920A 100%)",borderRadius:20,overflow:"hidden",position:"relative"}},
+      React.createElement("div", {style:{position:"absolute",top:-30,right:-30,width:140,height:140,borderRadius:"50%",background:"rgba(255,255,255,0.1)"}}),
+      React.createElement("div", {style:{padding:"20px 20px 16px",position:"relative",zIndex:2}},
+        React.createElement("div", {style:{display:"flex",gap:12,alignItems:"flex-start",marginBottom:12}},
+          React.createElement("div", {style:{width:48,height:48,borderRadius:12,background:"rgba(255,255,255,0.25)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}},
+            React.createElement("svg", {width:26,height:26,viewBox:"0 0 24 24",fill:"none",stroke:NV,strokeWidth:"2.5",strokeLinecap:"round",strokeLinejoin:"round"},
+              React.createElement("path", {d:"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"}),
+              React.createElement("polyline", {points:"14,2 14,8 20,8"}),
+              React.createElement("line", {x1:"16",y1:"13",x2:"8",y2:"13"}),
+              React.createElement("line", {x1:"16",y1:"17",x2:"8",y2:"17"})
+            )
+          ),
+          React.createElement("div", null,
+            React.createElement("div", {style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:15,fontWeight:800,color:NV,lineHeight:1.3}}, "VicRoads Drive Test Criteria Book"),
+            React.createElement("div", {style:{fontSize:12,color:"rgba(10,22,40,0.65)",marginTop:2}}, "Free official guide - know what examiners look for")
+          )
+        ),
+        React.createElement("p", {style:{fontSize:13,color:"rgba(10,22,40,0.8)",lineHeight:1.6,marginBottom:16}},
+          "The same guide our Ex-VicRoads instructor trained on. Download it free and know exactly what to expect on test day."
+        ),
+        React.createElement("a", {href:PDF_URL, target:"_blank", rel:"noopener noreferrer",
+          style:{display:"inline-flex",alignItems:"center",gap:8,padding:"11px 20px",background:NV,borderRadius:12,textDecoration:"none",fontWeight:700,fontSize:13,color:"#fff",fontFamily:"'Plus Jakarta Sans',sans-serif",boxShadow:"0 4px 16px rgba(10,22,40,0.25)"}},
+          React.createElement(Ico, {n:"dl",sz:15,c:GD}),
+          "Download Free PDF"
+        )
+      ),
+      React.createElement("div", {style:{height:180,position:"relative",overflow:"hidden"}},
+        React.createElement("div", {
+          style:{
+            position:"absolute",bottom:0,left:0,right:0,top:0,
+            backgroundImage:"url("+CAR_IMG+")",
+            backgroundSize:"contain",
+            backgroundPosition:"center bottom",
+            backgroundRepeat:"no-repeat"
+          }
+        }),
+        React.createElement("div", {style:{position:"absolute",bottom:0,left:0,right:0,height:60,background:"linear-gradient(to top,#E8920A 0%,transparent 100%)"}})
       )
     )
   );
@@ -376,6 +533,7 @@ function HomePage(props) {
         )
       ),
 
+      React.createElement(CarSection, null),
       React.createElement("div", {style:{background:"#2A2A2A",height:60,overflow:"hidden",position:"relative"}},
         React.createElement("div", {style:{position:"absolute",top:0,left:0,right:0,height:3,background:GD}}),
         React.createElement("div", {style:{position:"absolute",bottom:0,left:0,right:0,height:3,background:GD}}),
@@ -416,34 +574,7 @@ function HomePage(props) {
         })
       ),
 
-      React.createElement("div", {style:{padding:"0 20px 0"}},
-        React.createElement("div", {style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:20,fontWeight:800,color:NV,marginBottom:4}}, "Lesson Packages"),
-        React.createElement("div", {style:{fontSize:13,color:SL,marginBottom:16}}, "Contact us for pricing - we tailor to your needs")
-      ),
-      React.createElement("div", {style:{overflowX:"auto",WebkitOverflowScrolling:"touch",paddingLeft:20,paddingRight:20,paddingBottom:16,paddingTop:20}},
-        React.createElement("div", {style:{display:"flex",gap:14}},
-          PKGS.map(function(p) {
-            return React.createElement("div", {key:p.id, className:"pkgc",
-              style:{width:220,background:"#fff",borderRadius:20,padding:"24px 20px 20px",boxShadow:p.pop?"0 8px 32px rgba(46,134,222,0.2)":"0 4px 16px rgba(0,0,0,0.06)",border:p.pop?"2px solid "+B:"2px solid transparent",position:"relative",flexShrink:0,marginTop:p.pop?16:0,display:"flex",flexDirection:"column"}},
-              p.pop && React.createElement("div", {style:{position:"absolute",top:-14,left:"50%",transform:"translateX(-50%)",background:"linear-gradient(135deg,"+B+","+NV+")",color:"#fff",fontSize:10,fontWeight:800,padding:"4px 14px",borderRadius:20,whiteSpace:"nowrap"}}, "MOST POPULAR"),
-              React.createElement("div", {style:{width:40,height:40,borderRadius:12,background:p.pop?"#EFF6FF":"#F4F7FB",display:"flex",alignItems:"center",justifyContent:"center",marginBottom:10,fontFamily:"'Plus Jakarta Sans',sans-serif",fontWeight:800,fontSize:18,color:p.pop?B:SL}}, p.ico),
-              React.createElement("div", {style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:17,fontWeight:800,color:NV,marginBottom:4}}, p.name),
-              React.createElement("div", {style:{fontSize:12,color:SL,lineHeight:1.5,marginBottom:14}}, p.desc),
-              React.createElement("div", {style:{marginBottom:16,flex:1}},
-                p.feats.map(function(f) {
-                  return React.createElement("div", {key:f, style:{display:"flex",alignItems:"center",gap:6,marginBottom:5}},
-                    React.createElement("div", {style:{width:16,height:16,borderRadius:"50%",background:GR+"20",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}},
-                      React.createElement(Ico, {n:"check",sz:10,c:GR,sw:3})
-                    ),
-                    React.createElement("span", {style:{fontSize:12,color:SL}}, f)
-                  );
-                })
-              ),
-              React.createElement(Btn, {onClick:function(){ go("contact"); }, v:p.pop?"primary":"outline", full:true}, "Enquire Now")
-            );
-          })
-        )
-      ),
+      React.createElement(PkgsSection, {go:go}),
 
       React.createElement("div", {style:{background:"linear-gradient(135deg,"+NV+","+BL+")",margin:"0 16px",borderRadius:20,padding:20,position:"relative",overflow:"hidden"}},
         React.createElement("div", {style:{position:"absolute",top:-30,right:-30,width:120,height:120,borderRadius:"50%",background:"rgba(255,255,255,0.05)"}}),
@@ -488,6 +619,7 @@ function HomePage(props) {
         )
       ),
 
+      React.createElement(VicRoadsSection, null),
       React.createElement(Crd, {style:{margin:"20px 16px 0"}},
         React.createElement("div", {style:{display:"flex",justifyContent:"space-between",alignItems:"center"}},
           React.createElement("div", null,
