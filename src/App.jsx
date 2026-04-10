@@ -343,18 +343,18 @@ function CarSection() {
         })
       )
     ),
-    React.createElement("div", {style:{position:"relative",height:220,marginTop:10,overflow:"hidden",display:"flex",alignItems:"flex-end",justifyContent:"center"}},
+    React.createElement("div", {style:{position:"relative",height:240,marginTop:10,overflow:"hidden"}},
       React.createElement("div", {
         style:{
           width:"100%",height:"100%",
           backgroundImage:"url("+CAR_URL+")",
-          backgroundSize:"140%",
-          backgroundPosition:"center bottom",
+          backgroundSize:"90%",
+          backgroundPosition:"center center",
           backgroundRepeat:"no-repeat",
-          position:"absolute",bottom:0,left:0,right:0
+          position:"absolute",top:0,left:0,right:0,bottom:0
         }
       }),
-      React.createElement("div", {style:{position:"absolute",bottom:0,left:0,right:0,height:50,background:"linear-gradient(to top,#F0F4FF 0%,transparent 100%)",zIndex:2}})
+      React.createElement("div", {style:{position:"absolute",bottom:0,left:0,right:0,height:40,background:"linear-gradient(to top,#F0F4FF 0%,transparent 100%)",zIndex:2}})
     )
   );
 }
