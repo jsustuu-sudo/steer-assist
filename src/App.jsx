@@ -324,7 +324,7 @@ export default function App() {
 
 
 function CarSection() {
-  var CAR_URL = "https://cdn.rotorint.com/Corolla/2025_09_Sep/e/360/png/lo/907x510/SPN_AUS_0103U9FA204E25120A0_comp_004.png";
+  var CAR_URL = "https://cdn.rotorint.com/Corolla/2024_04_Apr/e/hero/png/lo/519x292/SPN_AUS_0101F7FA204E25120A0_compcrop_001.png";
   return React.createElement("div", {style:{background:"#F0F4FF",position:"relative",overflow:"hidden",borderBottom:"1px solid #E2E8F0"}},
     React.createElement("div", {style:{position:"absolute",top:0,left:0,right:0,height:4,background:"linear-gradient(90deg,"+B+","+NV+")"}}),
     React.createElement("div", {style:{padding:"28px 20px 0",position:"relative",zIndex:2}},
@@ -348,8 +348,8 @@ function CarSection() {
         style:{
           width:"100%",height:"100%",
           backgroundImage:"url("+CAR_URL+")",
-          backgroundSize:"140%",
-          backgroundPosition:"center 60%",
+          backgroundSize:"120%",
+          backgroundPosition:"center bottom",
           backgroundRepeat:"no-repeat",
           position:"absolute",bottom:0,left:0,right:0
         }
@@ -459,7 +459,7 @@ function VicRoadsSection() {
           style:{
             position:"absolute",bottom:0,left:0,right:0,top:0,
             backgroundImage:"url("+CAR_IMG+")",
-            backgroundSize:"85%",
+            backgroundSize:"65%",
             backgroundPosition:"center bottom",
             backgroundRepeat:"no-repeat"
           }
