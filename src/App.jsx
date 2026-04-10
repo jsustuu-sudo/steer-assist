@@ -328,10 +328,6 @@ function CarSection() {
   return React.createElement("div", {style:{background:"#F0F4FF",position:"relative",overflow:"hidden",borderBottom:"1px solid #E2E8F0"}},
     React.createElement("div", {style:{position:"absolute",top:0,left:0,right:0,height:4,background:"linear-gradient(90deg,"+B+","+NV+")"}}),
     React.createElement("div", {style:{padding:"28px 20px 0",position:"relative",zIndex:2}},
-      React.createElement("div", {style:{display:"flex",alignItems:"center",gap:10,marginBottom:6}},
-        React.createElement(Logo, {size:32}),
-        React.createElement("div", {style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:11,fontWeight:700,color:B,letterSpacing:2,textTransform:"uppercase"}}, "Steer Assist Driving School")
-      ),
       React.createElement("h2", {style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:22,fontWeight:800,color:NV,lineHeight:1.2,marginBottom:6}},
         "Welcome to ", React.createElement("span", {style:{color:B}}, "Steer Assist")
       ),
@@ -358,10 +354,6 @@ function CarSection() {
           position:"absolute",bottom:0,left:0,right:0
         }
       }),
-      React.createElement("div", {style:{position:"absolute",top:16,right:16,display:"flex",alignItems:"center",gap:6,background:"rgba(255,255,255,0.92)",borderRadius:10,padding:"6px 10px",border:"1px solid #E2E8F0",boxShadow:"0 2px 8px rgba(0,0,0,0.1)",zIndex:3}},
-        React.createElement(Logo, {size:20}),
-        React.createElement("span", {style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:10,fontWeight:800,color:NV}}, "Steer Assist")
-      ),
       React.createElement("div", {style:{position:"absolute",bottom:0,left:0,right:0,height:50,background:"linear-gradient(to top,#F0F4FF 0%,transparent 100%)",zIndex:2}})
     )
   );
@@ -467,8 +459,8 @@ function VicRoadsSection() {
           style:{
             position:"absolute",bottom:0,left:0,right:0,top:0,
             backgroundImage:"url("+CAR_IMG+")",
-            backgroundSize:"130%",
-            backgroundPosition:"center 55%",
+            backgroundSize:"85%",
+            backgroundPosition:"center bottom",
             backgroundRepeat:"no-repeat"
           }
         }),
