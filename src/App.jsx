@@ -434,7 +434,7 @@ function PkgsSection(props) {
 
 function VicRoadsSection() {
   var PDF_URL = "https://www.vicroads.vic.gov.au/~/media/files/formsandpublications/licences/driving_instructors_drive_test_criteria.pdf";
-  var CAR_IMG = "https://cdn.rotorint.com/Corolla/2025_09_Sep/e/360/png/lo/907x510/SPN_AUS_0101U9FA204E25120A0_comp_004.png";
+  var CAR_IMG = "https://cdn.rotorint.com/Corolla/2024_04_Apr/e/hero/png/lo/519x292/SPN_AUS_0101F7FA204E25120A0_compcrop_001.png";
   return React.createElement("div", {style:{margin:"20px 16px 0"}},
     React.createElement("div", {style:{background:"linear-gradient(135deg,#F5A623 0%,#E8920A 100%)",borderRadius:20,overflow:"hidden",position:"relative"}},
       React.createElement("div", {style:{position:"absolute",top:-30,right:-30,width:140,height:140,borderRadius:"50%",background:"rgba(255,255,255,0.1)"}}),
