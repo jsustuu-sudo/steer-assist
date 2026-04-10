@@ -348,7 +348,7 @@ function CarSection() {
         style:{
           width:"100%",height:"100%",
           backgroundImage:"url("+CAR_URL+")",
-          backgroundSize:"90%",
+          backgroundSize:"120%",
           backgroundPosition:"center center",
           backgroundRepeat:"no-repeat",
           position:"absolute",top:0,left:0,right:0,bottom:0
