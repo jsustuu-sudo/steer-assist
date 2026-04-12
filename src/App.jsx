@@ -329,7 +329,7 @@ function CarSection() {
     React.createElement("div", {style:{position:"absolute",top:0,left:0,right:0,height:4,background:"linear-gradient(90deg,"+B+","+NV+")"}}),
     React.createElement("div", {style:{padding:"28px 20px 0",position:"relative",zIndex:2}},
       React.createElement("h2", {style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:22,fontWeight:800,color:NV,lineHeight:1.2,marginBottom:6}},
-        "Welcome to ", React.createElement("span", {style:{color:B}}, "Steer Assist")
+        "Your Road to ", React.createElement("span", {style:{color:B}}, "Confidence")
       ),
       React.createElement("p", {style:{fontSize:13,color:SL,lineHeight:1.6,marginBottom:14,maxWidth:300}},
         "Learn in our modern dual-control Toyota Corolla with an Ex-VicRoads licence testing officer by your side."
@@ -501,7 +501,7 @@ function HomePage(props) {
           React.createElement("div", {className:on?"u1":""},
             React.createElement("div", {style:{fontSize:11,fontWeight:700,color:GD,letterSpacing:2,textTransform:"uppercase",marginBottom:8}}, "Trusted . Experienced . Local"),
             React.createElement("h1", {style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:30,fontWeight:800,color:"#fff",lineHeight:1.2,marginBottom:10}},
-              "Your Road to", React.createElement("br"), React.createElement("span", {style:{color:GD}}, "Confidence")
+              "Welcome to", React.createElement("br"), React.createElement("span", {style:{color:GD}}, "Steer Assist")
             ),
             React.createElement("p", {style:{fontSize:13,color:"rgba(255,255,255,0.75)",lineHeight:1.6,marginBottom:6,maxWidth:320}},
               "Ex-VicRoads Licence Testing Officer with ",
