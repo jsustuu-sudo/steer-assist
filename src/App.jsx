@@ -318,9 +318,6 @@ function CarSection() {
       React.createElement("div",{className:"car-sec-img",style:{position:"relative",height:240,marginTop:10,overflow:"hidden"}},
         React.createElement("div",{style:{position:"absolute",top:0,left:0,right:0,bottom:0,backgroundImage:"url("+CAR1+")",backgroundSize:"120%",backgroundPosition:"center center",backgroundRepeat:"no-repeat"}}),
         React.createElement("div",{style:{position:"absolute",bottom:0,left:0,right:0,height:40,background:"linear-gradient(to top,#F0F4FF 0%,transparent 100%)",zIndex:2}}),
-        React.createElement("div",{style:{position:"absolute",top:12,right:12,zIndex:3}},
-          React.createElement("img",{src:LOGO_IMG,alt:"Steer Assist",style:{height:44,objectFit:"contain"},onError:function(e){e.target.style.display="none";}})
-        )
       )
     )
   );
