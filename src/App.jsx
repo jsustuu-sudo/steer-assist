@@ -18,7 +18,7 @@ var EJS_KEY = "YOUR_PUBLIC_KEY";
 
 var CAR1 = "/images/steer%20assist%20car%201.png";
 var CAR2 = "/images/car%202.png";
-var LOGO_IMG = "/images/steer%20assist%20logo%20crop.png";
+var LOGO_IMG = "/images/steer%20assist%20logo%20BG.png";
 
 var SUBURBS = ["Clyde","Cranbourne","Berwick","Narre Warren","Pakenham","Frankston","Dromana","Warragul","Ringwood","Heatherton","Dandenong","Endeavour Hills"];
 var TOPICS = ["Cockpit checks","Moving off & stopping","Steering control","Gears & clutch","Junctions","Roundabouts","Dual carriageways","Bay parking","Parallel parking","Emergency stop","Motorway driving","Night driving","Independent driving"];
