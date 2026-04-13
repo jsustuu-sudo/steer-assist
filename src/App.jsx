@@ -176,9 +176,7 @@ function Stars(props) {
 
 function Logo(props) {
   var size=props.size||40;
-  return React.createElement("div",{style:{width:size,height:size,borderRadius:size*0.18,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,overflow:"hidden"}},
-    React.createElement("img",{src:LOGO_IMG,alt:"Steer Assist",style:{width:"100%",height:"100%",objectFit:"contain"},onError:function(e){ e.target.style.display="none"; }})
-  );
+  return
 }
 
 function IgIco(props) {
