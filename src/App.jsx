@@ -16,9 +16,9 @@ var EJS_SVC = "YOUR_SERVICE_ID";
 var EJS_TPL = "YOUR_TEMPLATE_ID";
 var EJS_KEY = "YOUR_PUBLIC_KEY";
 
-var CAR1 = "/images/steer assist car 1.png";
-var CAR2 = "/images/car 2.png";
-var LOGO_IMG = "/images/steer assist logo crop.png";
+var CAR1 = "/images/steer%20assist%20car%201.png";
+var CAR2 = "/images/car%202.png";
+var LOGO_IMG = "/images/steer%20assist%20logo%20crop.png";
 
 var SUBURBS = ["Clyde","Cranbourne","Berwick","Narre Warren","Pakenham","Frankston","Dromana","Warragul","Ringwood","Heatherton","Dandenong","Endeavour Hills"];
 var TOPICS = ["Cockpit checks","Moving off & stopping","Steering control","Gears & clutch","Junctions","Roundabouts","Dual carriageways","Bay parking","Parallel parking","Emergency stop","Motorway driving","Night driving","Independent driving"];
@@ -176,14 +176,8 @@ function Stars(props) {
 
 function Logo(props) {
   var size=props.size||40;
-  return React.createElement("div",{style:{width:size,height:size,background:"#fff",borderRadius:size*0.18,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,boxShadow:"0 2px 12px rgba(0,0,0,0.25)",overflow:"hidden",padding:size*0.06}},
-    React.createElement("svg",{viewBox:"0 0 100 100",width:size*0.82,height:size*0.82},
-      React.createElement("path",{d:"M 50 5 A 45 45 0 1 1 18 80",fill:"none",stroke:"#2E86DE",strokeWidth:"11",strokeLinecap:"round"}),
-      React.createElement("path",{d:"M 82 80 A 45 45 0 0 1 50 95",fill:"none",stroke:"#2E86DE",strokeWidth:"11",strokeLinecap:"round"}),
-      React.createElement("path",{d:"M 50 18 L 22 78 L 78 78 Z",fill:"#2E86DE"}),
-      React.createElement("line",{x1:"50",y1:"32",x2:"36",y2:"62",stroke:"white",strokeWidth:"3.5",strokeDasharray:"6,4",strokeLinecap:"round"}),
-      React.createElement("line",{x1:"50",y1:"32",x2:"64",y2:"62",stroke:"white",strokeWidth:"3.5",strokeDasharray:"6,4",strokeLinecap:"round"})
-    )
+  return React.createElement("div",{style:{width:size,height:size,borderRadius:size*0.18,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,overflow:"hidden"}},
+    React.createElement("img",{src:LOGO_IMG,alt:"Steer Assist",style:{width:"100%",height:"100%",objectFit:"contain"},onError:function(e){ e.target.style.display="none"; }})
   );
 }
 
