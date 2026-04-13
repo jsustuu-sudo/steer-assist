@@ -18,7 +18,7 @@ var EJS_KEY = "YOUR_PUBLIC_KEY";
 
 var CAR1 = "/images/steer%20assist%20car%201.png";
 var CAR2 = "/images/car%202.png";
-var LOGO_IMG = "/images/steer%20assist%20logo%20SQ.png";
+var LOGO_IMG = "/images/steer%20assist%20logo%20crop.png";
 
 var SUBURBS = ["Clyde","Cranbourne","Berwick","Narre Warren","Pakenham","Frankston","Dromana","Warragul","Ringwood","Heatherton","Dandenong","Endeavour Hills"];
 var TOPICS = ["Cockpit checks","Moving off & stopping","Steering control","Gears & clutch","Junctions","Roundabouts","Dual carriageways","Bay parking","Parallel parking","Emergency stop","Motorway driving","Night driving","Independent driving"];
@@ -98,7 +98,7 @@ var CSS = [
   ".pg{padding-bottom:76px;min-height:100vh;}",
   ".nav{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(180deg,#1B5FA8 0%,#0A1628 100%);display:flex;justify-content:center;z-index:200;padding-bottom:6px;box-shadow:0 -2px 20px rgba(0,0,0,0.4);}",
   ".nav-inner{display:flex;width:100%;max-width:1200px;}",
-  ".nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 2px 5px;background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.45);font-size:9px;font-weight:600;font-family:'Plus Jakarta Sans',sans-serif;transition:all 0.2s;}",
+  ".nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 2px 5px;background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.7);font-size:9px;font-weight:600;font-family:'Plus Jakarta Sans',sans-serif;transition:all 0.2s;}.nb:hover{color:#F5A623;}",
   ".nb.on{color:#fff;}",
   "@keyframes road{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}",
   "@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}",
@@ -120,7 +120,7 @@ var CSS = [
   "@media(min-width:768px){",
     ".pg{padding-bottom:0;padding-top:64px;}",
     ".nav{bottom:auto;top:0;box-shadow:0 2px 20px rgba(0,0,0,0.3);}",
-    ".nb{flex-direction:row;gap:6px;padding:18px 16px;font-size:12px;}",
+    ".nb{flex-direction:row;gap:6px;padding:18px 16px;font-size:12px;color:#fff;}.nb:hover{color:#F5A623!important;}",
     ".hero-inner{display:grid;grid-template-columns:1fr 1fr;min-height:480px;align-items:center;}",
     ".hero-text{padding:48px 48px!important;}",
     ".hero-car-col{display:block!important;position:relative;overflow:hidden;}",
@@ -131,12 +131,18 @@ var CSS = [
     ".pkgs-hdr{padding:0 48px!important;}",
     ".pkgs-note{margin:14px 48px 8px!important;}",
     ".stats-row{margin:24px 48px 0!important;}",
-    ".how-wrap{padding:32px 48px 0!important;}",
+    ".how-wrap{padding:32px 48px 0!important;}.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;}.how-item{padding-bottom:0!important;}.how-item .how-line{display:none!important;}",
     ".about-wrap{margin:16px 48px 0!important;}",
     ".rev-wrap{padding:20px 48px 0!important;}",
     ".vic-wrap{margin:20px 48px 0!important;}",
     ".faq-crd{margin:20px 48px 0!important;}",
     ".soc-row{margin:16px 48px 24px!important;}",
+    ".about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;margin:16px 48px 0!important;border-radius:20px;overflow:hidden;}",
+    ".about-inner{background:linear-gradient(135deg,#0A1628,#1B5FA8);padding:32px!important;border-radius:0!important;margin:0!important;}",
+    ".rev-cards{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:16px;}",
+    ".how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}",
+    ".how-item{padding-bottom:0!important;flex-direction:column!important;gap:12px!important;}",
+    ".how-line{display:none!important;}",
   "}",
 ].join("");
 
@@ -316,8 +322,11 @@ function CarSection() {
         )
       ),
       React.createElement("div",{className:"car-sec-img",style:{position:"relative",height:240,marginTop:10,overflow:"hidden"}},
-        React.createElement("div",{style:{position:"absolute",top:0,left:0,right:0,bottom:0,backgroundImage:"url("+CAR1+")",backgroundSize:"120%",backgroundPosition:"center center",backgroundRepeat:"no-repeat"}}),
+        React.createElement("div",{style:{position:"absolute",top:0,left:0,right:0,bottom:0,backgroundImage:"url("+CAR1+")",backgroundSize:"contain",backgroundPosition:"center bottom",backgroundRepeat:"no-repeat"}}),
         React.createElement("div",{style:{position:"absolute",bottom:0,left:0,right:0,height:40,background:"linear-gradient(to top,#F0F4FF 0%,transparent 100%)",zIndex:2}}),
+        React.createElement("div",{style:{position:"absolute",top:12,right:12,zIndex:3}},
+          React.createElement("img",{src:LOGO_IMG,alt:"Steer Assist",style:{height:44,objectFit:"contain"},onError:function(e){e.target.style.display="none";}})
+        )
       )
     )
   );
@@ -447,7 +456,10 @@ function HomePage(props) {
             React.createElement("button",{onClick:function(){go("contact");},style:{display:"flex",alignItems:"center",gap:6,padding:"11px 16px",background:"rgba(255,255,255,0.12)",border:"1.5px solid rgba(255,255,255,0.3)",borderRadius:12,fontWeight:700,fontSize:13,color:"#fff",cursor:"pointer"}},React.createElement(Ico,{n:"mail",sz:14,c:"#fff"})," Get Quote")
           )
         ),
-        React.createElement("div",{className:"hero-car-col",style:{display:"none",background:"rgba(255,255,255,0.04)",minHeight:400}})
+        React.createElement("div",{className:"hero-car-col",style:{display:"none",position:"relative",overflow:"hidden",minHeight:400}},
+        React.createElement("div",{style:{position:"absolute",top:0,left:0,right:0,bottom:0,backgroundImage:"url("+CAR1+")",backgroundSize:"contain",backgroundPosition:"center center",backgroundRepeat:"no-repeat"}}),
+        React.createElement("div",{style:{position:"absolute",bottom:0,left:0,right:0,height:80,background:"linear-gradient(to top,"+NV+" 0%,transparent 100%)"}})
+      )
       )
     ),
     React.createElement(CarSection,null),
@@ -469,23 +481,25 @@ function HomePage(props) {
     React.createElement("div",{className:"how-wrap",style:{padding:"24px 20px 0"}},
       React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:20,fontWeight:800,color:NV,marginBottom:4}},"How It Works"),
       React.createElement("div",{style:{fontSize:13,color:SL,marginBottom:16}},"Three simple steps to your licence"),
-      [["01","Book Online","Pick your day and time. Single or multi-book.","cal",B],
-       ["02","Learn & Track","Structured lessons with topic-by-topic tracking.","bar",GD],
-       ["03","Pass Your Test","We mark you ready and guide you through the test.","award",GR]
-      ].map(function(row,i){
-        return React.createElement("div",{key:row[0],style:{display:"flex",gap:14,paddingBottom:20,position:"relative"}},
-          i<2&&React.createElement("div",{style:{position:"absolute",left:20,top:44,width:2,height:"calc(100% - 16px)",background:row[4]+"40"}}),
-          React.createElement("div",{style:{width:42,height:42,borderRadius:12,background:row[4]+"20",border:"2px solid "+row[4]+"40",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}},React.createElement(Ico,{n:row[3],sz:18,c:row[4]})),
-          React.createElement("div",null,
-            React.createElement("div",{style:{fontSize:10,fontWeight:800,color:row[4],letterSpacing:1,textTransform:"uppercase",marginBottom:2}},row[0]),
-            React.createElement("div",{style:{fontWeight:800,fontSize:15,color:NV,marginBottom:3}},row[1]),
-            React.createElement("div",{style:{fontSize:12,color:SL,lineHeight:1.55}},row[2])
-          )
-        );
-      })
+      React.createElement("div",{className:"how-grid",style:{display:"block"}},
+        [["01","Book Online","Pick your day and time. Single or multi-book.","cal",B],
+         ["02","Learn & Track","Structured lessons with topic-by-topic tracking.","bar",GD],
+         ["03","Pass Your Test","We mark you ready and guide you through the test.","award",GR]
+        ].map(function(row,i){
+          return React.createElement("div",{key:row[0],className:"how-item",style:{display:"flex",gap:14,paddingBottom:20,position:"relative"}},
+            i<2&&React.createElement("div",{className:"how-line",style:{position:"absolute",left:20,top:44,width:2,height:"calc(100% - 16px)",background:row[4]+"40"}}),
+            React.createElement("div",{style:{width:52,height:52,borderRadius:14,background:row[4]+"15",border:"2px solid "+row[4]+"30",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}},React.createElement(Ico,{n:row[3],sz:22,c:row[4]})),
+            React.createElement("div",null,
+              React.createElement("div",{style:{fontSize:10,fontWeight:800,color:row[4],letterSpacing:1,textTransform:"uppercase",marginBottom:4}},row[0]),
+              React.createElement("div",{style:{fontWeight:800,fontSize:15,color:NV,marginBottom:4}},row[1]),
+              React.createElement("div",{style:{fontSize:12,color:SL,lineHeight:1.55}},row[2])
+            )
+          );
+        })
+      )
     ),
     React.createElement(PkgsSection,{go:go}),
-    React.createElement("div",{className:"about-wrap",style:{background:"linear-gradient(135deg,"+NV+","+BL+")",margin:"0 16px",borderRadius:20,padding:20,position:"relative",overflow:"hidden"}},
+    React.createElement("div",{className:"about-wrap about-inner",style:{background:"linear-gradient(135deg,"+NV+","+BL+")",margin:"0 16px",borderRadius:20,padding:20,position:"relative",overflow:"hidden"}},
       React.createElement("div",{style:{position:"absolute",top:-30,right:-30,width:120,height:120,borderRadius:"50%",background:"rgba(255,255,255,0.05)"}}),
       React.createElement("div",{style:{display:"flex",gap:12,alignItems:"flex-start",marginBottom:14}},
         React.createElement("div",{style:{width:52,height:52,borderRadius:14,background:"rgba(255,255,255,0.1)",border:"1.5px solid rgba(255,255,255,0.2)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}},React.createElement(Ico,{n:"shield",sz:24,c:GD})),
@@ -507,19 +521,17 @@ function HomePage(props) {
         React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:20,fontWeight:800,color:NV}},"Student Reviews"),
         React.createElement("button",{onClick:function(){go("reviews");},style:{fontSize:13,color:B,fontWeight:700,background:"none",border:"none",cursor:"pointer"}},"See all")
       ),
-      React.createElement("div",{style:{overflowX:"auto",WebkitOverflowScrolling:"touch",marginLeft:-20,paddingLeft:20,paddingRight:20,paddingBottom:4}},
-        React.createElement("div",{style:{display:"flex",gap:12}},
-          tests.slice(0,3).map(function(t){
-            return React.createElement("div",{key:t.id,style:{width:240,background:"#fff",borderRadius:16,padding:16,boxShadow:"0 4px 16px rgba(0,0,0,0.06)",flexShrink:0}},
-              React.createElement(Stars,{n:t.stars,size:13}),
-              React.createElement("p",{style:{fontSize:13,color:SL,fontStyle:"italic",lineHeight:1.55,margin:"8px 0 12px"}},'"'+t.text+'"'),
-              React.createElement("div",{style:{display:"flex",alignItems:"center",gap:8}},
-                React.createElement("div",{style:{width:30,height:30,borderRadius:"50%",background:"linear-gradient(135deg,"+B+","+NV+")",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontWeight:800,fontSize:12,flexShrink:0}},t.name[0]),
-                React.createElement("div",{style:{fontSize:13,fontWeight:700,color:NV}},t.name)
-              )
-            );
-          })
-        )
+      React.createElement("div",{className:"rev-cards",style:{overflowX:"auto",WebkitOverflowScrolling:"touch",display:"flex",gap:12,paddingBottom:4}},
+        tests.slice(0,3).map(function(t){
+          return React.createElement("div",{key:t.id,style:{minWidth:220,flex:1,background:"#fff",borderRadius:16,padding:16,boxShadow:"0 4px 16px rgba(0,0,0,0.06)",flexShrink:0}},
+            React.createElement(Stars,{n:t.stars,size:13}),
+            React.createElement("p",{style:{fontSize:13,color:SL,fontStyle:"italic",lineHeight:1.55,margin:"8px 0 12px"}},'"'+t.text+'"'),
+            React.createElement("div",{style:{display:"flex",alignItems:"center",gap:8}},
+              React.createElement("div",{style:{width:30,height:30,borderRadius:"50%",background:"linear-gradient(135deg,"+B+","+NV+")",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontWeight:800,fontSize:12,flexShrink:0}},t.name[0]),
+              React.createElement("div",{style:{fontSize:13,fontWeight:700,color:NV}},t.name)
+            )
+          );
+        })
       )
     ),
     React.createElement(VicRoadsSection,null),
