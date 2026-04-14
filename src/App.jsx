@@ -326,18 +326,21 @@ export default function App() {
 }
 
 function CarSection() {
-  return React.createElement("div",{style:{background:"#F0F4FF",position:"relative",overflow:"hidden",borderBottom:"1px solid #E2E8F0"}},
+  var badges = [["Dual Control","shield",B],["Modern Car","award",GD],["Auto & Manual","check",GR]];
+  return React.createElement("div",{style:{background:"#F0F4FF",borderBottom:"1px solid #E2E8F0",position:"relative"}},
     React.createElement("div",{style:{position:"absolute",top:0,left:0,right:0,height:4,background:"linear-gradient(90deg,"+B+","+NV+")"}}),
-    React.createElement("div",{className:"car-sec-inner",style:{display:"block"}},
-      React.createElement("div",{className:"car-sec-text",style:{padding:"28px 20px 0",position:"relative",zIndex:2}},
+
+    // --- MOBILE ---
+    React.createElement("div",{className:"d-hide"},
+      React.createElement("div",{style:{padding:"28px 20px 0"}},
         React.createElement("h2",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:22,fontWeight:800,color:NV,lineHeight:1.2,marginBottom:6}},
           "Your Road to ",React.createElement("span",{style:{color:B}},"Confidence")
         ),
-        React.createElement("p",{style:{fontSize:13,color:SL,lineHeight:1.6,marginBottom:14,maxWidth:400}},
+        React.createElement("p",{style:{fontSize:13,color:SL,lineHeight:1.6,marginBottom:14}},
           "Learn in our modern dual-control Toyota Corolla with an Ex-VicRoads licence testing officer by your side."
         ),
-        React.createElement("div",{style:{display:"flex",flexWrap:"wrap",gap:8,marginBottom:0}},
-          [["Dual Control","shield",B],["Modern Car","award",GD],["Auto & Manual","check",GR]].map(function(row){
+        React.createElement("div",{style:{display:"flex",flexWrap:"wrap",gap:8}},
+          badges.map(function(row){
             return React.createElement("div",{key:row[0],style:{display:"inline-flex",alignItems:"center",gap:5,padding:"5px 10px",background:row[2]+"15",borderRadius:20,border:"1px solid "+row[2]+"40"}},
               React.createElement(Ico,{n:row[1],sz:13,c:row[2]}),
               React.createElement("span",{style:{fontSize:11,fontWeight:700,color:row[2]}},row[0])
@@ -345,11 +348,34 @@ function CarSection() {
           })
         )
       ),
-      React.createElement("div",{className:"car-sec-img",style:{position:"relative",height:240,marginTop:10,overflow:"hidden"}},
+      React.createElement("div",{style:{position:"relative",height:240,marginTop:10,overflow:"hidden"}},
         React.createElement("div",{style:{position:"absolute",top:0,left:0,right:0,bottom:0,backgroundImage:"url("+CAR1+")",backgroundSize:"contain",backgroundPosition:"center bottom",backgroundRepeat:"no-repeat"}}),
-        React.createElement("div",{style:{position:"absolute",bottom:0,left:0,right:0,height:40,background:"linear-gradient(to top,#F0F4FF 0%,transparent 100%)",zIndex:2}}),
-        React.createElement("div",{style:{position:"absolute",top:12,right:12,zIndex:3}},
-          React.createElement("img",{src:LOGO_IMG,alt:"Steer Assist",style:{height:44,objectFit:"contain"},onError:function(e){e.target.style.display="none";}})
+        React.createElement("div",{style:{position:"absolute",bottom:0,left:0,right:0,height:40,background:"linear-gradient(to top,#F0F4FF,transparent)"}})
+      )
+    ),
+
+    // --- DESKTOP ---
+    React.createElement("div",{className:"d-show",style:{display:"none"}},
+      React.createElement("div",{style:{maxWidth:1200,margin:"0 auto",padding:"0 48px",display:"grid",gridTemplateColumns:"1fr 1fr",alignItems:"center",minHeight:440}},
+        React.createElement("div",{style:{padding:"60px 48px 60px 0"}},
+          React.createElement("div",{style:{fontSize:12,fontWeight:700,color:B,letterSpacing:2,textTransform:"uppercase",marginBottom:12}},"Our Training Vehicle"),
+          React.createElement("h2",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:38,fontWeight:800,color:NV,lineHeight:1.2,marginBottom:16}},
+            "Your Road to ",React.createElement("span",{style:{color:B}},"Confidence")
+          ),
+          React.createElement("p",{style:{fontSize:15,color:SL,lineHeight:1.8,marginBottom:28,maxWidth:420}},
+            "Learn in our modern dual-control Toyota Corolla with an Ex-VicRoads licence testing officer by your side. You are always safe."
+          ),
+          React.createElement("div",{style:{display:"flex",flexWrap:"wrap",gap:10}},
+            badges.map(function(row){
+              return React.createElement("div",{key:row[0],style:{display:"inline-flex",alignItems:"center",gap:8,padding:"8px 16px",background:row[2]+"12",borderRadius:24,border:"1.5px solid "+row[2]+"40"}},
+                React.createElement(Ico,{n:row[1],sz:15,c:row[2]}),
+                React.createElement("span",{style:{fontSize:13,fontWeight:700,color:row[2]}},row[0])
+              );
+            })
+          )
+        ),
+        React.createElement("div",{style:{height:440,display:"flex",alignItems:"center",justifyContent:"center",overflow:"hidden"}},
+          React.createElement("img",{src:CAR1,alt:"Steer Assist Car",style:{width:"100%",maxWidth:520,objectFit:"contain",objectPosition:"center"},onError:function(e){e.target.style.display="none";}})
         )
       )
     )
@@ -457,7 +483,7 @@ function HomePage(props) {
         React.createElement("div",{style:{display:"inline-flex",alignItems:"center",gap:8,background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:30,padding:"6px 14px",marginBottom:16}},
           React.createElement("svg",{width:15,height:15,viewBox:"0 0 24 24"},React.createElement("path",{d:"M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27 3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10 5.35 0 9.25-3.67 9.25-9.09 0-1.15-.15-1.81-.15-1.81z",fill:"#fff"})),
           React.createElement("span",{style:{color:"#fff",fontSize:12,fontWeight:700}},"5.0"),
-          React.createElement("span",{style:{color:GD,fontSize:13}},"-----"),
+          React.createElement("span",{style:{color:GD,fontSize:13}},"★★★★★"),
           React.createElement("span",{style:{color:"rgba(255,255,255,0.6)",fontSize:11}},"Google Reviews")
         ),
         React.createElement("div",{style:{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:24}},
@@ -500,7 +526,7 @@ function HomePage(props) {
           React.createElement("div",{style:{display:"inline-flex",alignItems:"center",gap:8,background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:30,padding:"6px 16px",marginBottom:20}},
             React.createElement("svg",{width:15,height:15,viewBox:"0 0 24 24"},React.createElement("path",{d:"M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27 3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10 5.35 0 9.25-3.67 9.25-9.09 0-1.15-.15-1.81-.15-1.81z",fill:"#fff"})),
             React.createElement("span",{style:{color:"#fff",fontSize:13,fontWeight:700}},"5.0"),
-            React.createElement("span",{style:{color:GD,fontSize:14}},"-----"),
+            React.createElement("span",{style:{color:GD,fontSize:14}},"★★★★★"),
             React.createElement("span",{style:{color:"rgba(255,255,255,0.7)",fontSize:12}},"Google Reviews")
           ),
           React.createElement("div",{style:{fontSize:12,fontWeight:700,color:GD,letterSpacing:3,textTransform:"uppercase",marginBottom:12}},"Trusted . Experienced . Local"),
