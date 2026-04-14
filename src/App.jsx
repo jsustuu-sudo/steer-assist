@@ -374,8 +374,8 @@ function CarSection() {
             })
           )
         ),
-        React.createElement("div",{style:{height:440,display:"flex",alignItems:"center",justifyContent:"center",overflow:"hidden"}},
-          React.createElement("img",{src:CAR1,alt:"Steer Assist Car",style:{width:"100%",maxWidth:700,objectFit:"contain",objectPosition:"center"},onError:function(e){e.target.style.display="none";}})
+        React.createElement("div",{style:{height:440,display:"flex",alignItems:"center",justifyContent:"center",overflow:"visible"}},
+          React.createElement("img",{src:CAR1,alt:"Steer Assist Car",style:{width:"150%",maxWidth:"none",objectFit:"contain",objectPosition:"center"},onError:function(e){e.target.style.display="none";}})
         )
       )
     )
