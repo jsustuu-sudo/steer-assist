@@ -98,8 +98,9 @@ var CSS = [
   ".pg{padding-bottom:76px;min-height:100vh;}",
   ".nav{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(180deg,#1B5FA8 0%,#0A1628 100%);display:flex;justify-content:center;z-index:200;padding-bottom:6px;box-shadow:0 -2px 20px rgba(0,0,0,0.4);}",
   ".nav-inner{display:flex;width:100%;max-width:1200px;}",
-  ".nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 2px 5px;background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.45);font-size:9px;font-weight:600;font-family:'Plus Jakarta Sans',sans-serif;transition:all 0.2s;}",
+  ".nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 2px 5px;background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.7);font-size:9px;font-weight:600;font-family:'Plus Jakarta Sans',sans-serif;transition:all 0.2s;}",
   ".nb.on{color:#fff;}",
+  ".nb:hover{color:#F5A623;}",
   "@keyframes road{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}",
   "@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}",
   "@keyframes shine{0%{background-position:-200% 0}100%{background-position:200% 0}}",
@@ -109,34 +110,63 @@ var CSS = [
   ".u2{animation:up 0.5s ease 0.2s both;}",
   ".sbadge{background:linear-gradient(90deg,#F5A623 25%,#FFD07B 50%,#F5A623 75%);background-size:200% 100%;animation:shine 2s infinite;}",
   ".ppill{animation:pout 0.3s ease forwards;}",
-  ".pkgc{transition:transform 0.2s;}",
-  ".pkgc:hover{transform:translateY(-3px);}",
+  ".pkgc{transition:transform 0.2s;}.pkgc:hover{transform:translateY(-3px);}",
   ".faqb{overflow:hidden;transition:max-height 0.3s ease,opacity 0.3s ease;}",
   ".si:focus{border-color:#2E86DE!important;outline:none;box-shadow:0 0 0 3px rgba(46,134,222,0.15);}",
   ".slb{transition:background 0.15s;}",
   ".pkgbtn{transition:all 0.25s ease;background:linear-gradient(135deg,#F5A623,#E8920A);border:none!important;color:#0A1628!important;}",
   ".pkgbtn:hover{background:linear-gradient(135deg,#2E86DE,#0A1628)!important;color:#fff!important;}",
-  ".wrap{max-width:1200px;margin:0 auto;}",
+  ".wrap{max-width:1200px;margin:0 auto;padding:0 20px;}",
+  ".d-show{display:none!important;}",
+  ".d-hide{display:block;}",
+
   "@media(min-width:768px){",
-    ".pg{padding-bottom:0;padding-top:64px;}",
-    ".nav{bottom:auto;top:0;box-shadow:0 2px 20px rgba(0,0,0,0.3);}",
-    ".nb{flex-direction:row;gap:6px;padding:18px 16px;font-size:12px;}",
-    ".hero-inner{display:grid;grid-template-columns:1fr 1fr;min-height:480px;align-items:center;}",
-    ".hero-text{padding:48px 48px!important;}",
-    ".hero-car-col{display:block!important;position:relative;overflow:hidden;}",
-    ".car-sec-inner{display:grid!important;grid-template-columns:1fr 1fr;}",
-    ".car-sec-text{padding:40px 48px!important;}",
-    ".car-sec-img{height:380px!important;}",
-    ".pkgs-grid{grid-template-columns:repeat(4,1fr)!important;padding:20px 48px 0!important;}",
-    ".pkgs-hdr{padding:0 48px!important;}",
-    ".pkgs-note{margin:14px 48px 8px!important;}",
-    ".stats-row{margin:24px 48px 0!important;}",
-    ".how-wrap{padding:32px 48px 0!important;}",
-    ".about-wrap{margin:16px 48px 0!important;}",
-    ".rev-wrap{padding:20px 48px 0!important;}",
-    ".vic-wrap{margin:20px 48px 0!important;}",
-    ".faq-crd{margin:20px 48px 0!important;}",
-    ".soc-row{margin:16px 48px 24px!important;}",
+
+  ".pg{padding-bottom:0;padding-top:70px;}",
+  ".d-show{display:block!important;}",
+  ".d-hide{display:none!important;}",
+  ".wrap{padding:0 48px;}",
+
+  ".nav{bottom:auto;top:0;box-shadow:0 2px 20px rgba(0,0,0,0.3);padding-bottom:0;}",
+  ".nav-inner{padding:0 24px;}",
+  ".nb{flex-direction:row;gap:8px;padding:20px 20px;font-size:13px;color:#fff;font-weight:700;}",
+  ".nb:hover{color:#F5A623!important;}",
+  ".nb.on{color:#fff;border-bottom:3px solid #F5A623;}",
+
+  ".d-hero{display:grid!important;grid-template-columns:1fr 1fr;min-height:520px;align-items:center;max-width:1200px;margin:0 auto;padding:0 48px;}",
+  ".d-hero-text{padding:60px 0;}",
+  ".d-hero-right{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:48px 0;}",
+
+  ".d-car-sec{display:grid!important;grid-template-columns:1fr 1fr;align-items:center;max-width:1200px;margin:0 auto;}",
+  ".d-car-text{padding:48px 48px 48px 0;}",
+  ".d-car-img{height:420px!important;border-radius:0;}",
+
+  ".d-stats{max-width:1200px;margin:32px auto 0!important;padding:0 48px;}",
+
+  ".d-how{max-width:1200px;margin:0 auto;padding:48px 48px 0;}",
+  ".d-how-grid{display:grid!important;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:32px;}",
+  ".d-how-card{background:#fff;border-radius:20px;padding:32px 28px;box-shadow:0 4px 24px rgba(0,0,0,0.06);}",
+
+  ".d-pkgs{max-width:1200px;margin:0 auto;padding:48px 48px 0;}",
+  ".d-pkgs-grid{grid-template-columns:repeat(4,1fr)!important;padding:0!important;}",
+  ".d-pkgs-note{margin:14px 0 8px!important;}",
+
+  ".d-about{max-width:1200px;margin:32px auto 0!important;padding:0 48px;}",
+  ".d-about-inner{border-radius:20px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;min-height:320px;}",
+  ".d-about-left{background:linear-gradient(135deg,#0A1628,#1B5FA8);padding:48px;}",
+  ".d-about-right{background:linear-gradient(135deg,#1B5FA8,#2E86DE);padding:48px;display:flex;flex-direction:column;justify-content:center;}",
+
+  ".d-reviews{max-width:1200px;margin:0 auto;padding:32px 48px 0;}",
+  ".d-rev-grid{display:grid!important;grid-template-columns:repeat(3,1fr);gap:20px;}",
+
+  ".d-vic{max-width:1200px;margin:32px auto 0!important;padding:0 48px;}",
+  ".d-vic-inner{display:grid;grid-template-columns:1fr 1fr;border-radius:20px;overflow:hidden;min-height:300px;}",
+  ".d-vic-text{background:linear-gradient(135deg,#F5A623,#E8920A);padding:48px;display:flex;flex-direction:column;justify-content:center;}",
+  ".d-vic-car{background:linear-gradient(135deg,#F5A623,#E8920A);display:flex;align-items:flex-end;justify-content:center;overflow:hidden;padding-top:32px;}",
+
+  ".d-faq{max-width:1200px;margin:32px auto 0!important;padding:0 48px;}",
+  ".d-soc{max-width:1200px;margin:16px auto 32px!important;padding:0 48px;}",
+
   "}",
 ].join("");
 
@@ -316,18 +346,21 @@ function CarSection() {
         )
       ),
       React.createElement("div",{className:"car-sec-img",style:{position:"relative",height:240,marginTop:10,overflow:"hidden"}},
-        React.createElement("div",{style:{position:"absolute",top:0,left:0,right:0,bottom:0,backgroundImage:"url("+CAR1+")",backgroundSize:"120%",backgroundPosition:"center center",backgroundRepeat:"no-repeat"}}),
+        React.createElement("div",{style:{position:"absolute",top:0,left:0,right:0,bottom:0,backgroundImage:"url("+CAR1+")",backgroundSize:"contain",backgroundPosition:"center bottom",backgroundRepeat:"no-repeat"}}),
         React.createElement("div",{style:{position:"absolute",bottom:0,left:0,right:0,height:40,background:"linear-gradient(to top,#F0F4FF 0%,transparent 100%)",zIndex:2}}),
+        React.createElement("div",{style:{position:"absolute",top:12,right:12,zIndex:3}},
+          React.createElement("img",{src:LOGO_IMG,alt:"Steer Assist",style:{height:44,objectFit:"contain"},onError:function(e){e.target.style.display="none";}})
+        )
       )
     )
   );
 }
 
 function PkgsSection(props) {
-  var go=props.go;
+  var go=props.go, desktop=props.desktop||false;
   var r=React.useState("auto"); var mode=r[0]; var setMode=r[1];
   return React.createElement("div",{style:{padding:"0 0 4px"}},
-    React.createElement("div",{className:"pkgs-hdr",style:{padding:"0 20px",marginBottom:16}},
+    !desktop&&React.createElement("div",{className:"pkgs-hdr",style:{padding:"0 20px",marginBottom:16}},
       React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:20,fontWeight:800,color:NV,marginBottom:4}},"Lesson Packages"),
       React.createElement("div",{style:{fontSize:13,color:SL,marginBottom:16}},"Transparent pricing - no hidden fees"),
       React.createElement("div",{style:{display:"flex",justifyContent:"center"}},
@@ -341,7 +374,7 @@ function PkgsSection(props) {
         )
       )
     ),
-    React.createElement("div",{className:"pkgs-grid",style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,padding:"20px 16px 0",alignItems:"stretch",gridAutoRows:"1fr"}},
+    React.createElement("div",{className:"pkgs-grid",style:{display:"grid",gridTemplateColumns:desktop?"repeat(4,1fr)":"1fr 1fr",gap:desktop?20:12,padding:desktop?"20px 0 0":"20px 16px 0",alignItems:"stretch",gridAutoRows:"1fr"}},
       PKGS.map(function(p){
         var price=mode==="auto"?p.aPrice:p.mPrice;
         var oldPrice=mode==="auto"?p.aOld:p.mOld;
@@ -365,7 +398,7 @@ function PkgsSection(props) {
         );
       })
     ),
-    React.createElement("div",{className:"pkgs-note",style:{margin:"14px 16px 8px",padding:"12px 16px",background:"#EFF6FF",borderRadius:14,display:"flex",alignItems:"flex-start",gap:8}},
+    React.createElement("div",{className:"pkgs-note",style:{margin:desktop?"14px 0 8px":"14px 16px 8px",padding:"12px 16px",background:"#EFF6FF",borderRadius:14,display:"flex",alignItems:"flex-start",gap:8}},
       React.createElement(Ico,{n:"qm",sz:15,c:B}),
       React.createElement("span",{style:{fontSize:12,color:BL,lineHeight:1.6}},"We can also alter the packages according to your need. Please call or message us for more info.")
     )
@@ -411,62 +444,118 @@ function HomePage(props) {
   var go=props.go, tests=props.tests;
   var r=useState(false); var on=r[0]; var setOn=r[1];
   useEffect(function(){ setTimeout(function(){ setOn(true); },50); },[]);
+
   return React.createElement("div",null,
+
+    // -- HERO ----------------------------------------------
     React.createElement("div",{style:{background:"linear-gradient(160deg,"+NV+" 0%,"+BL+" 55%,"+B+" 100%)",position:"relative",overflow:"hidden"}},
-      React.createElement("div",{style:{position:"absolute",top:-60,right:-60,width:220,height:220,borderRadius:"50%",background:"rgba(255,255,255,0.04)"}}),
-      React.createElement("div",{className:"hero-inner wrap",style:{display:"block"}},
-        React.createElement("div",{className:"hero-text",style:{padding:"24px 20px 0"}},
-          React.createElement("div",{style:{display:"inline-flex",alignItems:"center",gap:8,background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:30,padding:"6px 14px",marginBottom:16}},
-            React.createElement("svg",{width:15,height:15,viewBox:"0 0 24 24"},React.createElement("path",{d:"M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27 3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10 5.35 0 9.25-3.67 9.25-9.09 0-1.15-.15-1.81-.15-1.81z",fill:"#fff"})),
-            React.createElement("span",{style:{color:"#fff",fontSize:12,fontWeight:700}},"5.0"),
-            React.createElement("span",{style:{color:GD,fontSize:13}},"\u2605\u2605\u2605\u2605\u2605"),
-            React.createElement("span",{style:{color:"rgba(255,255,255,0.6)",fontSize:11}},"Google Reviews")
-          ),
-          React.createElement("div",{style:{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:24}},
-            React.createElement("div",{style:{display:"flex",alignItems:"center",gap:12}},
-              React.createElement(Logo,{size:46}),
-              React.createElement("div",null,
-                React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:20,fontWeight:800,color:"#fff",lineHeight:1}},"Steer Assist"),
-                React.createElement("div",{style:{fontSize:11,color:"rgba(255,255,255,0.65)",marginTop:2}},"Melbourne")
-              )
-            ),
-            React.createElement("div",{className:"sbadge",style:{padding:"5px 12px",borderRadius:20,fontSize:10,fontWeight:800,color:NV}},"EX-VICROADS")
-          ),
-          React.createElement("div",{className:on?"u1":""},
-            React.createElement("div",{style:{fontSize:11,fontWeight:700,color:GD,letterSpacing:2,textTransform:"uppercase",marginBottom:8}},"Trusted . Experienced . Local"),
-            React.createElement("h1",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:30,fontWeight:800,color:"#fff",lineHeight:1.2,marginBottom:10}},
-              "Welcome to",React.createElement("br"),React.createElement("span",{style:{color:GD}},"Steer Assist")
-            ),
-            React.createElement("p",{style:{fontSize:13,color:"rgba(255,255,255,0.75)",lineHeight:1.6,marginBottom:6,maxWidth:420}},
-              "Ex-VicRoads Licence Testing Officer with ",React.createElement("strong",{style:{color:"#fff"}},"2,500+ tests experience.")," We know exactly what examiners look for."
+      React.createElement("div",{style:{position:"absolute",top:-80,right:-80,width:300,height:300,borderRadius:"50%",background:"rgba(255,255,255,0.03)"}}),
+      React.createElement("div",{style:{position:"absolute",bottom:-60,left:-40,width:200,height:200,borderRadius:"50%",background:"rgba(255,255,255,0.02)"}}),
+
+      // Mobile hero
+      React.createElement("div",{className:"d-hide",style:{padding:"24px 20px 28px"}},
+        React.createElement("div",{style:{display:"inline-flex",alignItems:"center",gap:8,background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:30,padding:"6px 14px",marginBottom:16}},
+          React.createElement("svg",{width:15,height:15,viewBox:"0 0 24 24"},React.createElement("path",{d:"M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27 3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10 5.35 0 9.25-3.67 9.25-9.09 0-1.15-.15-1.81-.15-1.81z",fill:"#fff"})),
+          React.createElement("span",{style:{color:"#fff",fontSize:12,fontWeight:700}},"5.0"),
+          React.createElement("span",{style:{color:GD,fontSize:13}},"-----"),
+          React.createElement("span",{style:{color:"rgba(255,255,255,0.6)",fontSize:11}},"Google Reviews")
+        ),
+        React.createElement("div",{style:{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:24}},
+          React.createElement("div",{style:{display:"flex",alignItems:"center",gap:12}},
+            React.createElement(Logo,{size:46}),
+            React.createElement("div",null,
+              React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:20,fontWeight:800,color:"#fff",lineHeight:1}},"Steer Assist"),
+              React.createElement("div",{style:{fontSize:11,color:"rgba(255,255,255,0.65)",marginTop:2}},"Melbourne")
             )
           ),
-          React.createElement("div",{className:on?"u2":"",style:{display:"flex",gap:6,marginTop:20,paddingBottom:28,flexWrap:"nowrap",overflowX:"auto"}},
-            React.createElement(Btn,{onClick:function(){go("book");},v:"gold",sm:true},React.createElement(Ico,{n:"cal",sz:15,c:NV})," Book Lesson"),
-            React.createElement("button",{onClick:function(){go("reviews");},style:{display:"flex",alignItems:"center",gap:6,padding:"11px 16px",background:"rgba(255,255,255,0.12)",border:"1.5px solid rgba(255,255,255,0.3)",borderRadius:12,fontWeight:700,fontSize:13,color:"#fff",cursor:"pointer"}},React.createElement(Ico,{n:"star",sz:14,c:GD})," Reviews"),
-            React.createElement("button",{onClick:function(){go("contact");},style:{display:"flex",alignItems:"center",gap:6,padding:"11px 16px",background:"rgba(255,255,255,0.12)",border:"1.5px solid rgba(255,255,255,0.3)",borderRadius:12,fontWeight:700,fontSize:13,color:"#fff",cursor:"pointer"}},React.createElement(Ico,{n:"mail",sz:14,c:"#fff"})," Get Quote")
+          React.createElement("div",{className:"sbadge",style:{padding:"5px 12px",borderRadius:20,fontSize:10,fontWeight:800,color:NV}},"EX-VICROADS")
+        ),
+        React.createElement("div",{className:on?"u1":""},
+          React.createElement("div",{style:{fontSize:11,fontWeight:700,color:GD,letterSpacing:2,textTransform:"uppercase",marginBottom:8}},"Trusted . Experienced . Local"),
+          React.createElement("h1",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:30,fontWeight:800,color:"#fff",lineHeight:1.2,marginBottom:10}},
+            "Welcome to",React.createElement("br"),React.createElement("span",{style:{color:GD}},"Steer Assist")
+          ),
+          React.createElement("p",{style:{fontSize:13,color:"rgba(255,255,255,0.75)",lineHeight:1.6,marginBottom:6}},
+            "Ex-VicRoads Licence Testing Officer with ",React.createElement("strong",{style:{color:"#fff"}},"2,500+ tests experience.")," We know exactly what examiners look for."
           )
         ),
-        React.createElement("div",{className:"hero-car-col",style:{display:"none",background:"rgba(255,255,255,0.04)",minHeight:400}})
+        React.createElement("div",{className:on?"u2":"",style:{display:"flex",gap:6,marginTop:20,flexWrap:"nowrap",overflowX:"auto"}},
+          React.createElement(Btn,{onClick:function(){go("book");},v:"gold",sm:true},React.createElement(Ico,{n:"cal",sz:15,c:NV})," Book Lesson"),
+          React.createElement("button",{onClick:function(){go("reviews");},style:{display:"flex",alignItems:"center",gap:6,padding:"11px 16px",background:"rgba(255,255,255,0.12)",border:"1.5px solid rgba(255,255,255,0.3)",borderRadius:12,fontWeight:700,fontSize:13,color:"#fff",cursor:"pointer"}},React.createElement(Ico,{n:"star",sz:14,c:GD})," Reviews"),
+          React.createElement("button",{onClick:function(){go("contact");},style:{display:"flex",alignItems:"center",gap:6,padding:"11px 16px",background:"rgba(255,255,255,0.12)",border:"1.5px solid rgba(255,255,255,0.3)",borderRadius:12,fontWeight:700,fontSize:13,color:"#fff",cursor:"pointer"}},React.createElement(Ico,{n:"mail",sz:14,c:"#fff"})," Get Quote")
+        )
+      ),
+
+      // Desktop hero
+      React.createElement("div",{className:"d-show d-hero",style:{display:"none"}},
+        React.createElement("div",{className:"d-hero-text"},
+          React.createElement("div",{style:{display:"flex",alignItems:"center",gap:14,marginBottom:24}},
+            React.createElement(Logo,{size:52}),
+            React.createElement("div",null,
+              React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:22,fontWeight:800,color:"#fff",lineHeight:1}},"Steer Assist"),
+              React.createElement("div",{style:{fontSize:13,color:"rgba(255,255,255,0.65)",marginTop:4}},"Melbourne, Victoria"),
+              React.createElement("div",{className:"sbadge",style:{display:"inline-block",marginTop:6,padding:"3px 12px",borderRadius:20,fontSize:10,fontWeight:800,color:NV}},"EX-VICROADS OFFICER")
+            )
+          ),
+          React.createElement("div",{style:{display:"inline-flex",alignItems:"center",gap:8,background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:30,padding:"6px 16px",marginBottom:20}},
+            React.createElement("svg",{width:15,height:15,viewBox:"0 0 24 24"},React.createElement("path",{d:"M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27 3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10 5.35 0 9.25-3.67 9.25-9.09 0-1.15-.15-1.81-.15-1.81z",fill:"#fff"})),
+            React.createElement("span",{style:{color:"#fff",fontSize:13,fontWeight:700}},"5.0"),
+            React.createElement("span",{style:{color:GD,fontSize:14}},"-----"),
+            React.createElement("span",{style:{color:"rgba(255,255,255,0.7)",fontSize:12}},"Google Reviews")
+          ),
+          React.createElement("div",{style:{fontSize:12,fontWeight:700,color:GD,letterSpacing:3,textTransform:"uppercase",marginBottom:12}},"Trusted . Experienced . Local"),
+          React.createElement("h1",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:52,fontWeight:800,color:"#fff",lineHeight:1.15,marginBottom:16}},
+            "Welcome to",React.createElement("br"),React.createElement("span",{style:{color:GD}},"Steer Assist")
+          ),
+          React.createElement("p",{style:{fontSize:16,color:"rgba(255,255,255,0.8)",lineHeight:1.7,marginBottom:8,maxWidth:480}},
+            "Ex-VicRoads Licence Testing Officer with ",React.createElement("strong",{style:{color:"#fff"}},"2,500+ tests experience.")," We know exactly what examiners look for on test day."
+          ),
+          React.createElement("div",{style:{display:"flex",gap:12,marginTop:28,alignItems:"center"}},
+            React.createElement(Btn,{onClick:function(){go("book");},v:"gold"},React.createElement(Ico,{n:"cal",sz:18,c:NV})," Book a Lesson"),
+            React.createElement("button",{onClick:function(){go("reviews");},style:{display:"flex",alignItems:"center",gap:8,padding:"13px 22px",background:"rgba(255,255,255,0.12)",border:"1.5px solid rgba(255,255,255,0.3)",borderRadius:12,fontWeight:700,fontSize:15,color:"#fff",cursor:"pointer"}},React.createElement(Ico,{n:"star",sz:16,c:GD})," Reviews"),
+            React.createElement("button",{onClick:function(){go("contact");},style:{display:"flex",alignItems:"center",gap:8,padding:"13px 22px",background:"rgba(255,255,255,0.12)",border:"1.5px solid rgba(255,255,255,0.3)",borderRadius:12,fontWeight:700,fontSize:15,color:"#fff",cursor:"pointer"}},React.createElement(Ico,{n:"mail",sz:16,c:"#fff"})," Get Quote")
+          )
+        ),
+        // Desktop hero right - stats cards, NO car image
+        React.createElement("div",{className:"d-hero-right",style:{display:"none",paddingTop:0,justifyContent:"flex-end"}},
+          [["2,500+","Tests Conducted","trophy",GD],["5+","Years Experience","award",GD],["100%","Pass Rate","star","#fff"],["12+","Suburbs Covered","shield","#fff"]].map(function(row){
+            return React.createElement("div",{key:row[0],style:{display:"flex",alignItems:"center",gap:16,background:"rgba(255,255,255,0.1)",border:"1px solid rgba(255,255,255,0.18)",borderRadius:16,padding:"14px 20px",width:"100%"}},
+              React.createElement("div",{style:{width:42,height:42,borderRadius:12,background:"rgba(255,255,255,0.15)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}},React.createElement(Ico,{n:row[2],sz:20,c:row[3]})),
+              React.createElement("div",null,
+                React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:22,fontWeight:800,color:row[3]}},row[0]),
+                React.createElement("div",{style:{fontSize:12,color:"rgba(255,255,255,0.7)",marginTop:2,fontWeight:600}},row[1])
+              )
+            );
+          })
+        )
       )
     ),
+
+    // -- CAR SECTION ----------------------------------------
     React.createElement(CarSection,null),
-    React.createElement("div",{style:{background:"#2A2A2A",height:60,overflow:"hidden",position:"relative"}},
-      React.createElement("div",{style:{position:"absolute",top:0,left:0,right:0,height:3,background:GD}}),
-      React.createElement("div",{style:{position:"absolute",bottom:0,left:0,right:0,height:3,background:GD}}),
+
+    // -- ROAD ANIMATION -------------------------------------
+    React.createElement("div",{style:{background:"#1A1A2E",height:64,overflow:"hidden",position:"relative",flexShrink:0}},
+      React.createElement("div",{style:{position:"absolute",top:0,left:0,right:0,height:3,background:"linear-gradient(90deg,"+GD+","+AM+")"}}),
+      React.createElement("div",{style:{position:"absolute",bottom:0,left:0,right:0,height:3,background:"linear-gradient(90deg,"+GD+","+AM+")"}}),
       React.createElement("div",{className:"roadanim",style:{position:"absolute",top:"50%",transform:"translateY(-50%)",display:"flex",width:"200%",alignItems:"center"}},
-        Array.from({length:32},function(_,i){ return React.createElement("div",{key:i,style:{flexShrink:0,width:52,height:6,background:"#fff",borderRadius:3,marginRight:36,opacity:0.9}}); })
+        Array.from({length:40},function(_,i){ return React.createElement("div",{key:i,style:{flexShrink:0,width:48,height:6,background:"rgba(255,255,255,0.8)",borderRadius:3,marginRight:32}}); })
       )
     ),
-    React.createElement("div",{className:"stats-row",style:{background:"#fff",display:"grid",gridTemplateColumns:"repeat(4,1fr)",margin:"16px 16px 0",borderRadius:16,boxShadow:"0 4px 24px rgba(10,22,40,0.1)",overflow:"hidden"}},
+
+    // -- STATS ----------------------------------------------
+    React.createElement("div",{className:"d-stats",style:{background:"#fff",display:"grid",gridTemplateColumns:"repeat(4,1fr)",margin:"24px 16px 0",borderRadius:16,boxShadow:"0 4px 24px rgba(10,22,40,0.08)",overflow:"hidden"}},
       [["2,500+","Students"],["100%","Pass Rate"],["5+","Yrs Exp"],["2,500+","Tests"]].map(function(item,i){
-        return React.createElement("div",{key:item[1],style:{textAlign:"center",padding:"14px 4px",borderRight:i<3?"1px solid #F1F5F9":"none"}},
-          React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:17,fontWeight:800,color:B}},item[0]),
-          React.createElement("div",{style:{fontSize:10,color:MT,fontWeight:600,marginTop:2}},item[1])
+        return React.createElement("div",{key:item[1],style:{textAlign:"center",padding:"20px 8px",borderRight:i<3?"1px solid #F1F5F9":"none"}},
+          React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:22,fontWeight:800,color:B}},item[0]),
+          React.createElement("div",{style:{fontSize:11,color:MT,fontWeight:600,marginTop:3}},item[1])
         );
       })
     ),
-    React.createElement("div",{className:"how-wrap",style:{padding:"24px 20px 0"}},
+
+    // -- HOW IT WORKS ---------------------------------------
+    // Mobile
+    React.createElement("div",{className:"d-hide",style:{padding:"28px 20px 0"}},
       React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:20,fontWeight:800,color:NV,marginBottom:4}},"How It Works"),
       React.createElement("div",{style:{fontSize:13,color:SL,marginBottom:16}},"Three simple steps to your licence"),
       [["01","Book Online","Pick your day and time. Single or multi-book.","cal",B],
@@ -484,8 +573,42 @@ function HomePage(props) {
         );
       })
     ),
-    React.createElement(PkgsSection,{go:go}),
-    React.createElement("div",{className:"about-wrap",style:{background:"linear-gradient(135deg,"+NV+","+BL+")",margin:"0 16px",borderRadius:20,padding:20,position:"relative",overflow:"hidden"}},
+    // Desktop How It Works
+    React.createElement("div",{className:"d-show d-how",style:{display:"none"}},
+      React.createElement("div",{style:{textAlign:"center",marginBottom:8}},
+        React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:32,fontWeight:800,color:NV,marginBottom:8}},"How It Works"),
+        React.createElement("div",{style:{fontSize:15,color:SL}},"Three simple steps to your licence")
+      ),
+      React.createElement("div",{className:"d-how-grid"},
+        [["01","Book Online","Pick your preferred day and time. Book single or multiple lessons at once.","cal",B],
+         ["02","Learn & Track","Structured lessons with topic-by-topic progress tracking every session.","bar",GD],
+         ["03","Pass Your Test","We mark you exam-ready and guide you through the VicRoads test process.","award",GR]
+        ].map(function(row){
+          return React.createElement("div",{key:row[0],className:"d-how-card"},
+            React.createElement("div",{style:{width:60,height:60,borderRadius:16,background:row[4]+"15",border:"2px solid "+row[4]+"30",display:"flex",alignItems:"center",justifyContent:"center",marginBottom:20}},React.createElement(Ico,{n:row[3],sz:28,c:row[4]})),
+            React.createElement("div",{style:{fontSize:11,fontWeight:800,color:row[4],letterSpacing:2,textTransform:"uppercase",marginBottom:8}},row[0]),
+            React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontWeight:800,fontSize:20,color:NV,marginBottom:10}},row[1]),
+            React.createElement("div",{style:{fontSize:14,color:SL,lineHeight:1.7}},row[2])
+          );
+        })
+      )
+    ),
+
+    // -- PACKAGES -------------------------------------------
+    React.createElement("div",{className:"d-show d-pkgs",style:{display:"none"}},
+      React.createElement("div",{style:{textAlign:"center",marginBottom:8}},
+        React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:32,fontWeight:800,color:NV,marginBottom:8}},"Lesson Packages"),
+        React.createElement("div",{style:{fontSize:15,color:SL,marginBottom:20}},"Transparent pricing - no hidden fees")
+      ),
+      React.createElement(PkgsSection,{go:go,desktop:true})
+    ),
+    React.createElement("div",{className:"d-hide"},
+      React.createElement(PkgsSection,{go:go,desktop:false})
+    ),
+
+    // -- ABOUT (keep as is on mobile, 2-col on desktop) -----
+    // Mobile
+    React.createElement("div",{className:"d-hide",style:{background:"linear-gradient(135deg,"+NV+","+BL+")",margin:"16px 16px 0",borderRadius:20,padding:20,position:"relative",overflow:"hidden"}},
       React.createElement("div",{style:{position:"absolute",top:-30,right:-30,width:120,height:120,borderRadius:"50%",background:"rgba(255,255,255,0.05)"}}),
       React.createElement("div",{style:{display:"flex",gap:12,alignItems:"flex-start",marginBottom:14}},
         React.createElement("div",{style:{width:52,height:52,borderRadius:14,background:"rgba(255,255,255,0.1)",border:"1.5px solid rgba(255,255,255,0.2)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}},React.createElement(Ico,{n:"shield",sz:24,c:GD})),
@@ -502,7 +625,37 @@ function HomePage(props) {
         SUBURBS.map(function(s){ return React.createElement("span",{key:s,style:{background:"rgba(255,255,255,0.1)",borderRadius:20,padding:"3px 10px",fontSize:11,color:"rgba(255,255,255,0.8)",fontWeight:600}},s); })
       )
     ),
-    React.createElement("div",{className:"rev-wrap",style:{padding:"20px 20px 0"}},
+    // Desktop about 2-col
+    React.createElement("div",{className:"d-show d-about",style:{display:"none"}},
+      React.createElement("div",{className:"d-about-inner"},
+        React.createElement("div",{className:"d-about-left"},
+          React.createElement("div",{style:{display:"flex",gap:16,alignItems:"flex-start",marginBottom:24}},
+            React.createElement("div",{style:{width:60,height:60,borderRadius:16,background:"rgba(255,255,255,0.1)",border:"1.5px solid rgba(255,255,255,0.2)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}},React.createElement(Ico,{n:"shield",sz:28,c:GD})),
+            React.createElement("div",null,
+              React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:22,fontWeight:800,color:"#fff",lineHeight:1.3}},"Ex-VicRoads Licence Testing Officer"),
+              React.createElement("div",{style:{fontSize:13,color:"rgba(255,255,255,0.6)",marginTop:4}},"2,500+ Tests Conducted")
+            )
+          ),
+          React.createElement("p",{style:{fontSize:15,color:"rgba(255,255,255,0.8)",lineHeight:1.8,marginBottom:28}},
+            "Our instructor brings first-hand experience from inside the test centre. We train you exactly the way examiners assess - because we know exactly what they look for."
+          ),
+          React.createElement("div",{style:{display:"flex",gap:12}},
+            React.createElement(Btn,{onClick:function(){go("book");},v:"gold"},React.createElement(Ico,{n:"cal",sz:16,c:NV})," Book a Lesson"),
+            React.createElement("button",{onClick:function(){go("contact");},style:{display:"flex",alignItems:"center",gap:8,padding:"12px 20px",background:"rgba(255,255,255,0.1)",border:"1.5px solid rgba(255,255,255,0.3)",borderRadius:12,fontWeight:700,fontSize:14,color:"#fff",cursor:"pointer"}},React.createElement(Ico,{n:"phone",sz:16,c:"#fff"})," Call Us")
+          )
+        ),
+        React.createElement("div",{className:"d-about-right"},
+          React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:18,fontWeight:800,color:"#fff",marginBottom:20}},"Service Areas"),
+          React.createElement("div",{style:{display:"flex",flexWrap:"wrap",gap:8}},
+            SUBURBS.map(function(s){ return React.createElement("span",{key:s,style:{background:"rgba(255,255,255,0.15)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:20,padding:"6px 14px",fontSize:13,color:"#fff",fontWeight:600}},s); })
+          )
+        )
+      )
+    ),
+
+    // -- REVIEWS --------------------------------------------
+    // Mobile
+    React.createElement("div",{className:"d-hide",style:{padding:"20px 20px 0"}},
       React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14}},
         React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:20,fontWeight:800,color:NV}},"Student Reviews"),
         React.createElement("button",{onClick:function(){go("reviews");},style:{fontSize:13,color:B,fontWeight:700,background:"none",border:"none",cursor:"pointer"}},"See all")
@@ -522,17 +675,75 @@ function HomePage(props) {
         )
       )
     ),
-    React.createElement(VicRoadsSection,null),
-    React.createElement(Crd,{className:"faq-crd",style:{margin:"20px 16px 0"}},
-      React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center"}},
+    // Desktop reviews
+    React.createElement("div",{className:"d-show d-reviews",style:{display:"none"}},
+      React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:24}},
+        React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:32,fontWeight:800,color:NV}},"Student Reviews"),
+        React.createElement("button",{onClick:function(){go("reviews");},style:{fontSize:14,color:B,fontWeight:700,background:"none",border:"none",cursor:"pointer",display:"flex",alignItems:"center",gap:6}},React.createElement(Ico,{n:"cR",sz:16,c:B}),"See all reviews")
+      ),
+      React.createElement("div",{className:"d-rev-grid"},
+        tests.slice(0,3).map(function(t){
+          return React.createElement("div",{key:t.id,style:{background:"#fff",borderRadius:20,padding:28,boxShadow:"0 4px 20px rgba(0,0,0,0.06)"}},
+            React.createElement(Stars,{n:t.stars,size:16}),
+            React.createElement("p",{style:{fontSize:14,color:SL,fontStyle:"italic",lineHeight:1.7,margin:"14px 0 20px"}},'"'+t.text+'"'),
+            React.createElement("div",{style:{display:"flex",alignItems:"center",gap:10}},
+              React.createElement("div",{style:{width:38,height:38,borderRadius:"50%",background:"linear-gradient(135deg,"+B+","+NV+")",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontWeight:800,fontSize:14,flexShrink:0}},t.name[0]),
+              React.createElement("div",{style:{fontSize:14,fontWeight:700,color:NV}},t.name)
+            )
+          );
+        })
+      )
+    ),
+
+    // -- VICROADS -------------------------------------------
+    // Mobile
+    React.createElement("div",{className:"d-hide"},
+      React.createElement(VicRoadsSection,null)
+    ),
+    // Desktop VicRoads
+    React.createElement("div",{className:"d-show d-vic",style:{display:"none"}},
+      React.createElement("div",{className:"d-vic-inner"},
+        React.createElement("div",{className:"d-vic-text"},
+          React.createElement("div",{style:{display:"flex",gap:16,alignItems:"flex-start",marginBottom:20}},
+            React.createElement("div",{style:{width:56,height:56,borderRadius:14,background:"rgba(255,255,255,0.25)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}},
+              React.createElement("svg",{width:28,height:28,viewBox:"0 0 24 24",fill:"none",stroke:NV,strokeWidth:"2.5",strokeLinecap:"round",strokeLinejoin:"round"},
+                React.createElement("path",{d:"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"}),
+                React.createElement("polyline",{points:"14,2 14,8 20,8"}),
+                React.createElement("line",{x1:"16",y1:"13",x2:"8",y2:"13"}),
+                React.createElement("line",{x1:"16",y1:"17",x2:"8",y2:"17"})
+              )
+            ),
+            React.createElement("div",null,
+              React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:22,fontWeight:800,color:NV,lineHeight:1.3}},"VicRoads Drive Test Criteria Book"),
+              React.createElement("div",{style:{fontSize:13,color:"rgba(10,22,40,0.65)",marginTop:4}},"Free official guide - know what examiners look for")
+            )
+          ),
+          React.createElement("p",{style:{fontSize:15,color:"rgba(10,22,40,0.8)",lineHeight:1.75,marginBottom:28}},
+            "The same guide our Ex-VicRoads instructor trained on. Download it free and know exactly what to expect on test day."
+          ),
+          React.createElement("a",{href:"https://www.vicroads.vic.gov.au/~/media/files/formsandpublications/licences/driving_instructors_drive_test_criteria.pdf",target:"_blank",rel:"noopener noreferrer",style:{display:"inline-flex",alignItems:"center",gap:10,padding:"14px 28px",background:NV,borderRadius:14,textDecoration:"none",fontWeight:700,fontSize:15,color:"#fff",fontFamily:"'Plus Jakarta Sans',sans-serif",boxShadow:"0 4px 20px rgba(10,22,40,0.3)"}},
+            React.createElement(Ico,{n:"dl",sz:18,c:GD}),"Download Free PDF"
+          )
+        ),
+        React.createElement("div",{className:"d-vic-car"},
+          React.createElement("img",{src:CAR2,alt:"Toyota Corolla",style:{width:"90%",maxWidth:420,objectFit:"contain",objectPosition:"bottom",display:"block"},onError:function(e){e.target.style.display="none";}})
+        )
+      )
+    ),
+
+    // -- FAQ CARD -------------------------------------------
+    React.createElement("div",{className:"d-faq",style:{margin:"20px 16px 0"}},
+      React.createElement("div",{style:{background:"#fff",borderRadius:16,padding:20,boxShadow:"0 2px 12px rgba(0,0,0,0.06)",display:"flex",justifyContent:"space-between",alignItems:"center"}},
         React.createElement("div",null,
           React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:16,fontWeight:800,color:NV,marginBottom:4}},"Got Questions?"),
-          React.createElement("div",{style:{fontSize:13,color:SL}},"Browse our FAQs")
+          React.createElement("div",{style:{fontSize:13,color:SL}},"Browse our frequently asked questions")
         ),
         React.createElement(Btn,{onClick:function(){go("faq");},sm:true},"View FAQs")
       )
     ),
-    React.createElement("div",{className:"soc-row",style:{margin:"16px 16px 24px",display:"flex",gap:10}},
+
+    // -- SOCIAL ---------------------------------------------
+    React.createElement("div",{className:"d-soc",style:{margin:"16px 16px 24px",display:"flex",gap:10}},
       React.createElement(SBtn,{href:IG},React.createElement(IgIco,{sz:17})," Instagram"),
       React.createElement(SBtn,{href:FB},React.createElement(FbIco,{sz:17})," Facebook"),
       React.createElement(SBtn,{href:WA},React.createElement(WaIco,{sz:17})," WhatsApp")
