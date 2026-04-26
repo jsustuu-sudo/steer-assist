@@ -280,7 +280,7 @@ export default function App() {
   function go(p){ setPage(p); window.scrollTo(0,0); }
   var pubNav=isInst
     ?[{id:"dashboard",l:"Home",n:"home"},{id:"diary",l:"Diary",n:"cal"},{id:"students",l:"Students",n:"user"},{id:"achieve",l:"Achieve",n:"trophy"}]
-    :[{id:"home",l:"Home",n:"home"},{id:"book",l:"Book",n:"cal"},{id:"mybookings",l:"Bookings",n:"user"},{id:"progress",l:"Progress",n:"bar"},{id:"reviews",l:"Reviews",n:"star"}];
+    :[{id:"home",l:"Home",n:"home"},{id:"book",l:"Book",n:"cal"},{id:"mybookings",l:"My Bookings",n:"user"},{id:"progress",l:"Progress",n:"bar"},{id:"reviews",l:"Reviews",n:"star"}];
   var xnav=isInst?{id:"x",l:"Logout",n:"logout"}:{id:"login",l:"Login",n:"lock"};
   return React.createElement(React.Fragment,null,
     React.createElement("style",null,CSS),
