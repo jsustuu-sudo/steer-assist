@@ -544,7 +544,7 @@ function HomePage(props) {
         ),
         // Desktop hero right - stats cards, NO car image
         React.createElement("div",{className:"d-hero-right",style:{display:"none",paddingTop:0,justifyContent:"flex-end"}},
-          [["2,500+","Tests Conducted","trophy",GD],["5+","Years Experience","award",GD],["100%","Pass Rate","star","#fff"],["12+","Suburbs Covered","shield","#fff"]].map(function(row){
+          [["2,500+","Tests Conducted","trophy",GD],["5+","Years Experience","award",GD],["99%","Pass Rate","star","#fff"],["12+","Suburbs Covered","shield","#fff"]].map(function(row){
             return React.createElement("div",{key:row[0],style:{display:"flex",alignItems:"center",gap:16,background:"rgba(255,255,255,0.1)",border:"1px solid rgba(255,255,255,0.18)",borderRadius:16,padding:"14px 20px",width:"100%"}},
               React.createElement("div",{style:{width:42,height:42,borderRadius:12,background:"rgba(255,255,255,0.15)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}},React.createElement(Ico,{n:row[2],sz:20,c:row[3]})),
               React.createElement("div",null,
