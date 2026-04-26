@@ -12,9 +12,9 @@ var FB = "https://www.facebook.com/people/Steer-Assist-Driving-School/1000894712
 var IG = "https://www.instagram.com/steerassist/";
 var WA = "https://wa.me/61474917491";
 var GGL = "https://share.google/zViQvMSEjYmzqNsg7";
-var EJS_SVC = "YOUR_SERVICE_ID";
-var EJS_TPL = "YOUR_TEMPLATE_ID";
-var EJS_KEY = "YOUR_PUBLIC_KEY";
+var EJS_SVC = "service_nmde1si";
+var EJS_TPL = "template_vqz1p1b";
+var EJS_KEY = "-b1tWgGTupnb625uo";
 
 var CAR1 = "/images/steer%20assist%20car%201.png";
 var CAR2 = "/images/car%202.png";
