@@ -646,7 +646,7 @@ function HomePage(props) {
       React.createElement("p",{style:{fontSize:13,color:"rgba(255,255,255,0.75)",lineHeight:1.65,marginBottom:14}},
         "Our instructor brings first-hand experience from inside the test centre. We know exactly what examiners look for on test day."
       ),
-      React.createElement("div",{style:{fontWeight:700,fontSize:12,color:GD,marginBottom:10}},"Service Areas"),
+      React.createElement("div",{style:{fontWeight:700,fontSize:12,color:GD,marginBottom:10}},"Servicing all of Melbourne & surrounds"),
       React.createElement("div",{style:{display:"flex",flexWrap:"wrap",gap:6}},
         SUBURBS.map(function(s){ return React.createElement("span",{key:s,style:{background:"rgba(255,255,255,0.1)",borderRadius:20,padding:"3px 10px",fontSize:11,color:"rgba(255,255,255,0.8)",fontWeight:600}},s); })
       )
