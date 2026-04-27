@@ -49,10 +49,10 @@ var GREV = [
 ];
 
 var ST = [
-  {id:"t1",name:"Amir Hassan",text:"Passed first time! The VicRoads experience made all the difference.",stars:5,date:"2025-03-20"},
-  {id:"t2",name:"Lena Park",text:"So patient and clear. I was terrified of highways but now I love driving!",stars:5,date:"2025-02-14"},
+  {id:"t1",name:"Lena Park",text:"Passed first time! The VicRoads experience made all the difference.",stars:5,date:"2025-03-20"},
+  {id:"t2",name:"Sheila Smith",text:"So patient and clear. I was terrified of highways but now I love driving!",stars:5,date:"2025-02-14"},
   {id:"t3",name:"Marcus T.",text:"10 lessons, first-time pass. Worth every cent.",stars:5,date:"2025-01-30"},
-  {id:"t4",name:"Zara Ahmed",text:"Best decision I made. Knew what the examiner was looking for.",stars:5,date:"2024-12-10"},
+  {id:"t4",name:"Zara",text:"Best decision I made. Knew what the examiner was looking for.",stars:5,date:"2024-12-10"},
 ];
 
 function uid() { return Math.random().toString(36).slice(2,10); }
