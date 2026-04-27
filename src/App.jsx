@@ -524,7 +524,7 @@ function HomePage(props) {
       )
     ),
     React.createElement("div",{className:"d-stats",style:{background:"#fff",display:"grid",gridTemplateColumns:"repeat(4,1fr)",margin:"24px 16px 0",borderRadius:16,boxShadow:"0 4px 24px rgba(10,22,40,0.08)",overflow:"hidden"}},
-      [["2,500+","Students"],["100%","Pass Rate"],["5+","Yrs Exp"],["2,500+","Tests"]].map(function(item,i){
+      [["2,500+","Students"],["99%","Pass Rate"],["5+","Yrs Exp"],["2,500+","Tests"]].map(function(item,i){
         return React.createElement("div",{key:item[1],style:{textAlign:"center",padding:"20px 8px",borderRight:i<3?"1px solid #F1F5F9":"none"}},
           React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:22,fontWeight:800,color:B}},item[0]),
           React.createElement("div",{style:{fontSize:11,color:MT,fontWeight:600,marginTop:3}},item[1])
