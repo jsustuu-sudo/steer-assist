@@ -472,7 +472,7 @@ function HomePage(props) {
           React.createElement("span",{style:{color:"rgba(255,255,255,0.6)",fontSize:11}},"Google Reviews")
         ),
         React.createElement("div",{style:{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:24}},
-          React.createElement("div",{style:{display:"flex",alignItems:"center",gap:12}},React.createElement(Logo,{size:46}),React.createElement("div",null,React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:20,fontWeight:800,color:"#fff",lineHeight:1}},"Steer Assist"),React.createElement("div",{style:{fontSize:11,color:"rgba(255,255,255,0.65)",marginTop:2}},"Melbourne"))),
+          React.createElement("div",{style:{display:"flex",alignItems:"center",gap:12}},React.createElement(Logo,{size:46}),React.createElement("div",null,React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:20,fontWeight:800,color:"#fff",lineHeight:1}},"Steer Assist Driving School"),React.createElement("div",{style:{fontSize:11,color:"rgba(255,255,255,0.65)",marginTop:2}},"Melbourne"))),
           React.createElement("div",{className:"sbadge",style:{padding:"5px 12px",borderRadius:20,fontSize:10,fontWeight:800,color:NV}},"EX-VICROADS")
         ),
         React.createElement("div",{className:on?"u1":""},
