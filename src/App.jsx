@@ -461,7 +461,7 @@ function HomePage(props) {
       React.createElement("div",{style:{position:"absolute",top:-80,right:-80,width:300,height:300,borderRadius:"50%",background:"rgba(255,255,255,0.03)"}}),
       React.createElement("div",{style:{position:"absolute",bottom:-60,left:-40,width:200,height:200,borderRadius:"50%",background:"rgba(255,255,255,0.02)"}}),
       React.createElement("div",{className:"d-hide",style:{padding:"24px 20px 28px"}},
-        React.createElement("div",{style:{display:"inline-flex",alignItems:"center",gap:8,background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:30,padding:"6px 14px",marginBottom:16}},
+        React.createElement("a",{href:"https://www.google.com/search?hl=en-GB&gl=uk&q=Steer+Assist+Driving+School&ludocid=6497258942805452546&lsig=AB86z5U4Nbz0nnmDGMO1qd9uc-f9#",target:"_blank",rel:"noopener noreferrer",style:{display:"inline-flex",alignItems:"center",gap:8,background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:30,padding:"6px 14px",marginBottom:16,textDecoration:"none"}},
           React.createElement("svg",{width:15,height:15,viewBox:"0 0 24 24"},React.createElement("path",{d:"M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27 3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10 5.35 0 9.25-3.67 9.25-9.09 0-1.15-.15-1.81-.15-1.81z",fill:"#fff"})),
           React.createElement("span",{style:{color:"#fff",fontSize:12,fontWeight:700}},"5.0"),
           React.createElement("span",{style:{color:GD,fontSize:13}},"★★★★★"),
@@ -488,7 +488,7 @@ function HomePage(props) {
             React.createElement(Logo,{size:52}),
             React.createElement("div",null,React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:22,fontWeight:800,color:"#fff",lineHeight:1}},"Steer Assist Driving School"),React.createElement("div",{style:{fontSize:13,color:"rgba(255,255,255,0.65)",marginTop:4}},"Melbourne, Victoria"),React.createElement("div",{className:"sbadge",style:{display:"inline-block",marginTop:6,padding:"3px 12px",borderRadius:20,fontSize:10,fontWeight:800,color:NV}},"EX-VICROADS OFFICER"))
           ),
-          React.createElement("div",{style:{display:"inline-flex",alignItems:"center",gap:8,background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:30,padding:"6px 16px",marginBottom:20}},
+          React.createElement("a",{href:"https://www.google.com/search?hl=en-GB&gl=uk&q=Steer+Assist+Driving+School&ludocid=6497258942805452546&lsig=AB86z5U4Nbz0nnmDGMO1qd9uc-f9#",target:"_blank",rel:"noopener noreferrer",style:{display:"inline-flex",alignItems:"center",gap:8,background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:30,padding:"6px 16px",marginBottom:20,textDecoration:"none"}},
             React.createElement("svg",{width:15,height:15,viewBox:"0 0 24 24"},React.createElement("path",{d:"M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27 3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10 5.35 0 9.25-3.67 9.25-9.09 0-1.15-.15-1.81-.15-1.81z",fill:"#fff"})),
             React.createElement("span",{style:{color:"#fff",fontSize:13,fontWeight:700}},"5.0"),React.createElement("span",{style:{color:GD,fontSize:14}},"★★★★★"),React.createElement("span",{style:{color:"rgba(255,255,255,0.7)",fontSize:12}},"Google Reviews")
           ),
