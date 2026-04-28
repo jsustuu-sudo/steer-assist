@@ -42,11 +42,7 @@ var FAQS = [
   {q:"Do you offer intensive courses?", a:"Yes! Contact us to discuss your timeline and we can arrange intensive lesson packages."},
   {q:"What makes Steer Assist different?", a:"Our lead instructor is an Ex-VicRoads Licence Testing Officer with 2,500+ tests experience. We know exactly what examiners look for."},
 ];
-var GREV = [
-  {name:"Hannah B.", stars:5, text:"Incredible patience and knowledge. My son passed first attempt!", ago:"2 weeks ago"},
-  {name:"Raj Patel", stars:5, text:"Very professional. Knew exactly what VicRoads examiners want to see.", ago:"1 month ago"},
-  {name:"Chloe M.", stars:5, text:"Made me feel confident from day one. Cannot recommend enough.", ago:"3 months ago"},
-];
+var GREV = [];
 
 var ST = [
   {id:"t1",name:"Lena Park",text:"Passed first time! The VicRoads experience made all the difference.",stars:5,date:"2025-03-20"},
@@ -756,7 +752,7 @@ function RevPage(props) {
   return React.createElement("div",null,
     React.createElement("div",{style:{background:"linear-gradient(160deg,"+NV+","+BL+")",padding:"20px 20px 28px",color:"#fff"}},
       React.createElement("div",{className:"wrap",style:{display:"flex",alignItems:"center",gap:12,marginBottom:16}},React.createElement(Logo,{size:38}),React.createElement("div",null,React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:18,fontWeight:800}},"Reviews"),React.createElement("div",{style:{fontSize:11,opacity:0.65}},"What our students say"))),
-      React.createElement("div",{className:"wrap",style:{display:"flex",alignItems:"center",gap:16}},React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:52,fontWeight:800,color:"#fff",lineHeight:1}},"5.0"),React.createElement("div",null,React.createElement("div",{style:{color:GD,fontSize:24}},"\u2605\u2605\u2605\u2605\u2605"),React.createElement("div",{style:{fontSize:12,opacity:0.7,marginTop:4}},(tests.length+GREV.length)+" total reviews")))
+      React.createElement("div",{className:"wrap",style:{display:"flex",alignItems:"center",gap:16}},React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:52,fontWeight:800,color:"#fff",lineHeight:1}},"5.0"),React.createElement("div",null,React.createElement("div",{style:{color:GD,fontSize:24}},"\u2605\u2605\u2605\u2605\u2605"),React.createElement("a",{href:"https://www.google.com/maps/place/Steer+Assist+Driving+School/@-38.0698958,145.4580482,17z",target:"_blank",rel:"noopener noreferrer",style:{fontSize:12,opacity:0.7,marginTop:4,color:"#fff",textDecoration:"underline"}},"1,014 Google Reviews")))
     ),
     React.createElement("div",{style:{padding:16},className:"wrap"},
       React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:18,fontWeight:800,color:NV,marginBottom:12}},"Student Testimonials"),
@@ -764,9 +760,7 @@ function RevPage(props) {
         tests.map(function(t){ return React.createElement("div",{key:t.id,style:{background:"#fff",borderRadius:16,padding:14,boxShadow:"0 2px 10px rgba(0,0,0,0.05)"}},React.createElement("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:8}},React.createElement("div",{style:{width:32,height:32,borderRadius:"50%",background:"linear-gradient(135deg,"+B+","+NV+")",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontWeight:800,fontSize:13,flexShrink:0}},t.name[0]),React.createElement("div",{style:{fontSize:12,fontWeight:700,color:NV}},t.name)),React.createElement(Stars,{n:t.stars,size:12}),React.createElement("p",{style:{fontSize:12,color:SL,lineHeight:1.5,fontStyle:"italic",marginTop:6}},'"'+(t.text.length>80?t.text.slice(0,80)+"...":t.text)+'"')); })
       ),
       React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:18,fontWeight:800,color:NV,marginBottom:12}},"Google Reviews"),
-      React.createElement("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",gap:12,marginBottom:16}},
-        GREV.map(function(r,i){ return React.createElement("div",{key:i,style:{background:"#fff",borderRadius:16,padding:20,boxShadow:"0 2px 12px rgba(0,0,0,0.06)"}},React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"flex-start"}},React.createElement("div",{style:{display:"flex",gap:10}},React.createElement("div",{style:{width:38,height:38,borderRadius:"50%",background:"#E8F0FE",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:800,color:"#4285F4",fontSize:15}},r.name[0]),React.createElement("div",null,React.createElement("div",{style:{fontWeight:700,fontSize:14,color:NV}},r.name),React.createElement(Stars,{n:r.stars,size:13}))),React.createElement("div",{style:{fontSize:11,color:MT}},r.ago)),React.createElement("p",{style:{fontSize:13,color:SL,marginTop:8,fontStyle:"italic"}},'"'+r.text+'"')); })
-      ),
+      React.createElement("div",{dangerouslySetInnerHTML:{__html:'<script src="https://elfsightcdn.com/platform.js" async><\/script><div class="elfsight-app-75168746-83f5-4ddb-92c4-98e957895492" data-elfsight-app-lazy></div>'},style:{marginBottom:16}}),
       React.createElement("div",{style:{display:"flex",gap:8,marginTop:4}},
         React.createElement(SBtn,{href:IG},React.createElement(IgIco,{sz:15})," Instagram"),
         React.createElement(SBtn,{href:FB},React.createElement(FbIco,{sz:15})," Facebook"),
@@ -926,15 +920,23 @@ function AchvPage(props) {
   var tests=props.tests,setTests=props.setTests;
   var r1=useState(false); var showForm=r1[0]; var setShowForm=r1[1];
   var r2=useState({name:"",text:"",stars:5,date:tod()}); var form=r2[0]; var setForm=r2[1];
+  var r3=useState("testimonials"); var tab=r3[0]; var setTab=r3[1];
   function add(){ if(!form.name||!form.text) return; setTests([Object.assign({id:uid()},form),...tests]); setForm({name:"",text:"",stars:5,date:tod()}); setShowForm(false); }
   return React.createElement("div",null,
     React.createElement("div",{style:{background:"linear-gradient(160deg,"+NV+","+BL+")",padding:"20px 20px 24px",color:"#fff"}},React.createElement("div",{className:"wrap",style:{display:"flex",justifyContent:"space-between",alignItems:"center"}},React.createElement("div",null,React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:18,fontWeight:800}},"Achievements"),React.createElement("div",{style:{fontSize:11,opacity:0.65}},"Manage testimonials")),React.createElement("button",{onClick:function(){ setShowForm(!showForm); },style:{display:"flex",alignItems:"center",gap:6,padding:"8px 14px",background:"linear-gradient(135deg,"+GD+","+AM+")",border:"none",borderRadius:10,fontWeight:700,fontSize:12,color:NV,cursor:"pointer"}},React.createElement(Ico,{n:"plus",sz:13,c:NV})," Add"))),
-    React.createElement("div",{style:{padding:16},className:"wrap"},
+    React.createElement("div",{style:{display:"flex",gap:6,padding:"12px 16px 0",borderBottom:"1px solid "+LN,background:"#fff"},className:"wrap"},
+      [["testimonials","Testimonials"],["google","Google Reviews"]].map(function(row){ return React.createElement("button",{key:row[0],onClick:function(){ setTab(row[0]); },style:{padding:"10px 20px",borderRadius:"10px 10px 0 0",border:"none",cursor:"pointer",fontWeight:700,fontSize:13,background:tab===row[0]?B:"transparent",color:tab===row[0]?"#fff":SL}},row[1]); })
+      ),
+      React.createElement("div",{style:{padding:16},className:"wrap"},
+      tab==="google"&&React.createElement("div",{style:{marginTop:8}},
+        React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:16,fontWeight:800,color:NV,marginBottom:16}},"Live Google Reviews"),
+        React.createElement("div",{dangerouslySetInnerHTML:{__html:'<script src="https://elfsightcdn.com/platform.js" async><\/script><div class="elfsight-app-75168746-83f5-4ddb-92c4-98e957895492" data-elfsight-app-lazy></div>'}})
+      ),
+      tab==="testimonials"&&React.createElement("div",null,
       showForm&&React.createElement(Crd,{style:{marginBottom:14}},React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:16,fontWeight:800,color:NV,marginBottom:14}},"New Testimonial"),[["name","Student Name","John Smith"],["text","Testimonial","What did they say?"]].map(function(row){ var k=row[0],l=row[1],ph=row[2]; return React.createElement("div",{key:k,style:{marginBottom:12}},React.createElement(Lbl,null,l),React.createElement(Inp,{value:form[k],onChange:function(e){ setForm(Object.assign({},form,{[k]:e.target.value})); },placeholder:ph,multi:k==="text"})); }),React.createElement("div",{style:{marginBottom:14}},React.createElement(Lbl,null,"Stars"),React.createElement("div",{style:{display:"flex",gap:6}},[1,2,3,4,5].map(function(n){ return React.createElement("button",{key:n,onClick:function(){ setForm(Object.assign({},form,{stars:n})); },style:{fontSize:26,background:"none",border:"none",cursor:"pointer",opacity:n<=form.stars?1:0.25,color:GD,padding:2}},"\u2605"); }))),React.createElement(Btn,{onClick:add,v:"green",full:true},"Save")),
       React.createElement("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:14}},[[tests.length,"Testimonials",GD],[GREV.length,"Google Reviews","#4285F4"]].map(function(row){ return React.createElement("div",{key:row[1],style:{background:"#fff",borderRadius:14,padding:14,textAlign:"center",boxShadow:"0 2px 10px rgba(0,0,0,0.05)"}},React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:24,fontWeight:800,color:row[2]}},row[0]),React.createElement("div",{style:{fontSize:12,color:MT}},row[1])); })),
       React.createElement("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(280px,1fr))",gap:12}},
         tests.map(function(t){ return React.createElement(Crd,{key:t.id,style:{margin:0}},React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"flex-start"}},React.createElement("div",{style:{display:"flex",gap:10,flex:1}},React.createElement("div",{style:{width:38,height:38,borderRadius:"50%",background:"linear-gradient(135deg,"+B+","+NV+")",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontWeight:800,fontSize:15,flexShrink:0}},t.name[0]),React.createElement("div",{style:{flex:1}},React.createElement("div",{style:{fontWeight:700,fontSize:14,color:NV}},t.name),React.createElement(Stars,{n:t.stars,size:13}),React.createElement("p",{style:{fontSize:12,color:SL,marginTop:5,fontStyle:"italic",lineHeight:1.5}},'"'+t.text+'"'),React.createElement("div",{style:{fontSize:10,color:MT,marginTop:4}},t.date))),React.createElement("button",{onClick:function(){ setTests(tests.filter(function(x){ return x.id!==t.id; })); },style:{background:"#FEE2E2",border:"none",borderRadius:8,padding:"6px 8px",cursor:"pointer",marginLeft:8}},React.createElement(Ico,{n:"trash",sz:13,c:RD})))); })
       )
-    )
-  );
+    )));
 }
