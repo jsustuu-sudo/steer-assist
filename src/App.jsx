@@ -747,6 +747,20 @@ function ProgPage(props) {
   );
 }
 
+function ElfsightWidget() {
+  useEffect(function(){
+    if(!document.querySelector('script[src="https://elfsightcdn.com/platform.js"]')){
+      var s=document.createElement("script");
+      s.src="https://elfsightcdn.com/platform.js";
+      s.async=true;
+      document.head.appendChild(s);
+    } else if(window.elfsight) {
+      window.elfsight.reload();
+    }
+  },[]);
+  return React.createElement("div",{className:"elfsight-app-75168746-83f5-4ddb-92c4-98e957895492","data-elfsight-app-lazy":true});
+}
+
 function RevPage(props) {
   var tests=props.tests;
   return React.createElement("div",null,
@@ -760,7 +774,7 @@ function RevPage(props) {
         tests.map(function(t){ return React.createElement("div",{key:t.id,style:{background:"#fff",borderRadius:16,padding:14,boxShadow:"0 2px 10px rgba(0,0,0,0.05)"}},React.createElement("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:8}},React.createElement("div",{style:{width:32,height:32,borderRadius:"50%",background:"linear-gradient(135deg,"+B+","+NV+")",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontWeight:800,fontSize:13,flexShrink:0}},t.name[0]),React.createElement("div",{style:{fontSize:12,fontWeight:700,color:NV}},t.name)),React.createElement(Stars,{n:t.stars,size:12}),React.createElement("p",{style:{fontSize:12,color:SL,lineHeight:1.5,fontStyle:"italic",marginTop:6}},'"'+(t.text.length>80?t.text.slice(0,80)+"...":t.text)+'"')); })
       ),
       React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:18,fontWeight:800,color:NV,marginBottom:12}},"Google Reviews"),
-      React.createElement("div",{dangerouslySetInnerHTML:{__html:'<script src="https://elfsightcdn.com/platform.js" async><\/script><div class="elfsight-app-75168746-83f5-4ddb-92c4-98e957895492" data-elfsight-app-lazy></div>'},style:{marginBottom:16}}),
+      React.createElement(ElfsightWidget,null),
       React.createElement("div",{style:{display:"flex",gap:8,marginTop:4}},
         React.createElement(SBtn,{href:IG},React.createElement(IgIco,{sz:15})," Instagram"),
         React.createElement(SBtn,{href:FB},React.createElement(FbIco,{sz:15})," Facebook"),
@@ -930,7 +944,7 @@ function AchvPage(props) {
       React.createElement("div",{style:{padding:16},className:"wrap"},
       tab==="google"&&React.createElement("div",{style:{marginTop:8}},
         React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:16,fontWeight:800,color:NV,marginBottom:16}},"Live Google Reviews"),
-        React.createElement("div",{dangerouslySetInnerHTML:{__html:'<script src="https://elfsightcdn.com/platform.js" async><\/script><div class="elfsight-app-75168746-83f5-4ddb-92c4-98e957895492" data-elfsight-app-lazy></div>'}})
+        React.createElement(ElfsightWidget,null)
       ),
       tab==="testimonials"&&React.createElement("div",null,
       showForm&&React.createElement(Crd,{style:{marginBottom:14}},React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:16,fontWeight:800,color:NV,marginBottom:14}},"New Testimonial"),[["name","Student Name","John Smith"],["text","Testimonial","What did they say?"]].map(function(row){ var k=row[0],l=row[1],ph=row[2]; return React.createElement("div",{key:k,style:{marginBottom:12}},React.createElement(Lbl,null,l),React.createElement(Inp,{value:form[k],onChange:function(e){ setForm(Object.assign({},form,{[k]:e.target.value})); },placeholder:ph,multi:k==="text"})); }),React.createElement("div",{style:{marginBottom:14}},React.createElement(Lbl,null,"Stars"),React.createElement("div",{style:{display:"flex",gap:6}},[1,2,3,4,5].map(function(n){ return React.createElement("button",{key:n,onClick:function(){ setForm(Object.assign({},form,{stars:n})); },style:{fontSize:26,background:"none",border:"none",cursor:"pointer",opacity:n<=form.stars?1:0.25,color:GD,padding:2}},"\u2605"); }))),React.createElement(Btn,{onClick:add,v:"green",full:true},"Save")),
