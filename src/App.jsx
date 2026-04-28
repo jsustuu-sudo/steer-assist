@@ -773,7 +773,7 @@ function RevPage(props) {
       React.createElement("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(200px,1fr))",gap:10,marginBottom:20}},
         tests.map(function(t){ return React.createElement("div",{key:t.id,style:{background:"#fff",borderRadius:16,padding:14,boxShadow:"0 2px 10px rgba(0,0,0,0.05)"}},React.createElement("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:8}},React.createElement("div",{style:{width:32,height:32,borderRadius:"50%",background:"linear-gradient(135deg,"+B+","+NV+")",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontWeight:800,fontSize:13,flexShrink:0}},t.name[0]),React.createElement("div",{style:{fontSize:12,fontWeight:700,color:NV}},t.name)),React.createElement(Stars,{n:t.stars,size:12}),React.createElement("p",{style:{fontSize:12,color:SL,lineHeight:1.5,fontStyle:"italic",marginTop:6}},'"'+(t.text.length>80?t.text.slice(0,80)+"...":t.text)+'"')); })
       ),
-      React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:18,fontWeight:800,color:NV,marginBottom:12}},"Google Reviews"),
+      React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:18,fontWeight:800,color:NV,marginBottom:12}},"Reviews"),
       React.createElement(ElfsightWidget,null),
       React.createElement("div",{style:{display:"flex",gap:8,marginTop:4}},
         React.createElement(SBtn,{href:IG},React.createElement(IgIco,{sz:15})," Instagram"),
