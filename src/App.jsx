@@ -582,10 +582,10 @@ function HomePage(props) {
     ),
     React.createElement("div",{style:{padding:"20px 20px 0"}},
       React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14}},
-        React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:20,fontWeight:800,color:NV}},"Google Reviews"),
-        React.createElement("a",{href:"https://www.google.com/maps/place/Steer+Assist+Driving+School/@-38.0698958,145.4580482,17z",target:"_blank",rel:"noopener noreferrer",style:{fontSize:13,color:B,fontWeight:700,textDecoration:"none"}},"See all")
+        React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:20,fontWeight:800,color:NV}},""),
+        React.createElement("a",{href:"https://www.google.com/search?hl=en-GB&gl=uk&q=Steer+Assist+Driving+School&ludocid=6497258942805452546&lsig=AB86z5U4Nbz0nnmDGMO1qd9uc-f9#",target:"_blank",rel:"noopener noreferrer",style:{fontSize:13,color:B,fontWeight:700,textDecoration:"none"}},"See all")
       ),
-      React.createElement("div",{dangerouslySetInnerHTML:{__html:'<script src="https://elfsightcdn.com/platform.js" async><\/script><div class="elfsight-app-75168746-83f5-4ddb-92c4-98e957895492" data-elfsight-app-lazy></div>'}})
+      React.createElement(ElfsightWidget,null)
     ),
     React.createElement("div",{className:"d-hide"},React.createElement(VicRoadsSection,null)),
     React.createElement("div",{className:"d-show d-vic",style:{display:"none"}},
