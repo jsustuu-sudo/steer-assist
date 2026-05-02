@@ -661,32 +661,38 @@ function BookPage(props) {
   async function confirm(){
     if(submitting) return;
     setSubmitting(true);
-    try {
-      var slotsCopy=[...slots];
-      // Find or create student
+    var slotsCopy=[...slots];
       var stCurrent=stus.find(function(s){ return s.email.toLowerCase()===form.email.toLowerCase(); });
       if(!stCurrent){
         stCurrent={id:uid(),name:form.name,email:form.email,phone:form.phone,enrolled:tod(),progress:Object.fromEntries(TOPICS.map(function(t){ return [t,false]; })),examReady:false,examDate:null,examResult:null};
         await addStudent(stCurrent);
       }
-      // Add bookings one at a time
       for(var bi=0;bi<slotsCopy.length;bi++){
         var sl=slotsCopy[bi];
         var newBk={id:uid(),sid:stCurrent.id,sName:form.name,sEmail:form.email,sPhone:form.phone,date:sl.date,hour:sl.hour,dur:sl.dur,status:"confirmed",notes:form.notes};
         await addBooking(newBk);
       }
-      // Send confirmation email
-      try{
-        var emailPayload={service_id:EJS_SVC,template_id:"template_1eaij5q",user_id:EJS_KEY,template_params:{student_name:form.name,student_email:form.email,lesson_date:slotsCopy.map(function(sl){ return fmtD(sl.date)+" at "+fmtT(sl.hour); }).join(", "),lesson_time:slotsCopy.length>0?fmtT(slotsCopy[0].hour):"",pickup_location:form.notes||"To be confirmed"}};
-        var emailResp=await fetch("https://api.emailjs.com/api/v1.0/email/send",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(emailPayload)});
-        var emailResult=await emailResp.text();
-        console.log("Email result:",emailResult);
-      }catch(emailErr){ console.log("Email error:",emailErr); }
+      var lessonDateStr=slotsCopy.map(function(sl){ return fmtD(sl.date)+" at "+fmtT(sl.hour); }).join(", ");
+      var lessonTimeStr=slotsCopy.length>0?fmtT(slotsCopy[0].hour):"";
+      console.log("Sending email to:",form.email,"lesson:",lessonDateStr);
+      fetch("https://api.emailjs.com/api/v1.0/email/send",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          service_id:EJS_SVC,
+          template_id:"template_1eaij5q",
+          user_id:EJS_KEY,
+          template_params:{
+            student_name:form.name,
+            student_email:form.email,
+            lesson_date:lessonDateStr,
+            lesson_time:lessonTimeStr,
+            pickup_location:form.notes||"To be confirmed"
+          }
+        })
+      }).then(function(r){ return r.text(); }).then(function(t){ console.log("Email sent:",t); }).catch(function(e){ console.log("Email failed:",e); });
       setStep(4);
-    } catch(err){
-      console.log("Booking error",err);
       setSubmitting(false);
-    }
   }
 
   function Hdr(){ return React.createElement("div",{style:{background:"linear-gradient(160deg,"+NV+","+BL+")",padding:"20px 20px 16px",color:"#fff"}},React.createElement("div",{className:"wrap",style:{display:"flex",alignItems:"center",gap:12,marginBottom:16}},React.createElement(Logo,{size:38}),React.createElement("div",null,React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:18,fontWeight:800}},"Book a Lesson"),React.createElement("div",{style:{fontSize:11,opacity:0.65}},"Step "+Math.min(step,3)+" of 3"))),React.createElement("div",{className:"wrap",style:{display:"flex",gap:6}},["Details","Pick Slots","Confirm"].map(function(s,i){ return React.createElement("div",{key:s,style:{flex:1}},React.createElement("div",{style:{height:3,borderRadius:4,background:step>i+1?"#fff":step===i+1?"rgba(255,255,255,0.8)":"rgba(255,255,255,0.25)",transition:"all 0.3s"}}),React.createElement("div",{style:{fontSize:10,color:step>=i+1?"rgba(255,255,255,0.8)":"rgba(255,255,255,0.35)",marginTop:4,fontWeight:600}},s)); }))); }
