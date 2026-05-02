@@ -247,7 +247,21 @@ function Btn(props) {
   var bg=v==="primary"?"linear-gradient(135deg,"+B+","+NV+")":v==="gold"?"linear-gradient(135deg,"+GD+","+AM+")":v==="green"?"linear-gradient(135deg,"+GR+",#059669)":v==="red"?RD:"#F4F7FB";
   var col=v==="outline"?NV:v==="ghost"?B:"#fff";
   var bdr=v==="outline"?"2px solid "+LN:v==="ghost"?"2px solid "+B:"none";
-  return React.createElement("button",{onClick:props.onClick,style:{display:"inline-flex",alignItems:"center",justifyContent:"center",gap:6,padding:props.sm?"8px 16px":"12px 22px",background:bg,border:bdr,borderRadius:12,fontWeight:700,fontSize:props.sm?13:15,color:col,cursor:"pointer",fontFamily:"'Plus Jakarta Sans',sans-serif",width:props.full?"100%":"auto",transition:"all 0.2s"}},props.children);
+  return React.createElement("button",{onClick:props.onClick,disabled:props.disabled,style:{display:"inline-flex",alignItems:"center",justifyContent:"center",gap:6,padding:props.sm?"8px 16px":"12px 22px",background:bg,border:bdr,borderRadius:12,fontWeight:700,fontSize:props.sm?13:15,color:col,cursor:props.disabled?"not-allowed":"pointer",opacity:props.disabled?0.7:1,fontFamily:"'Plus Jakarta Sans',sans-serif",width:props.full?"100%":"auto",transition:"all 0.2s"}},props.children);
+}
+
+function ElfsightWidget() {
+  useEffect(function(){
+    if(!document.querySelector('script[src="https://elfsightcdn.com/platform.js"]')){
+      var s=document.createElement("script");
+      s.src="https://elfsightcdn.com/platform.js";
+      s.async=true;
+      document.head.appendChild(s);
+    } else if(window.elfsight) {
+      window.elfsight.reload();
+    }
+  },[]);
+  return React.createElement("div",{className:"elfsight-app-75168746-83f5-4ddb-92c4-98e957895492","data-elfsight-app-lazy":true});
 }
 
 export default function App() {
@@ -275,13 +289,20 @@ export default function App() {
     load();
   },[]);
 
-  async function setBks(newBks){ setBksRaw(newBks); }
+  // Booking functions - passed to BookPage
+  async function addBooking(newBk){
+    await sbUpsert("bookings",{id:newBk.id,sid:newBk.sid,s_name:newBk.sName,s_email:newBk.sEmail,s_phone:newBk.sPhone,date:newBk.date,hour:newBk.hour,dur:newBk.dur,status:newBk.status,notes:newBk.notes});
+    setBksRaw(function(prev){ return [...prev,newBk]; });
+  }
+
+  async function addStudent(newStu){
+    await sbUpsert("students",{id:newStu.id,name:newStu.name,email:newStu.email,phone:newStu.phone,enrolled:newStu.enrolled,progress:newStu.progress,exam_ready:newStu.examReady,exam_date:newStu.examDate,exam_result:newStu.examResult});
+    setStusRaw(function(prev){ return [...prev,newStu]; });
+  }
 
   async function setStus(newStus){
     setStusRaw(newStus);
-    var added=newStus.filter(function(s){ return !stus.find(function(x){ return x.id===s.id; }); });
     var changed=newStus.filter(function(s){ var old=stus.find(function(x){ return x.id===s.id; }); return old&&JSON.stringify(old)!==JSON.stringify(s); });
-    for(var i=0;i<added.length;i++){ var sa=added[i]; await sbUpsert("students",{id:sa.id,name:sa.name,email:sa.email,phone:sa.phone,enrolled:sa.enrolled,progress:sa.progress,exam_ready:sa.examReady,exam_date:sa.examDate,exam_result:sa.examResult}); }
     for(var j=0;j<changed.length;j++){ var sc=changed[j]; await sbUpdate("students",sc.id,{progress:sc.progress,exam_ready:sc.examReady,exam_date:sc.examDate,exam_result:sc.examResult}); }
   }
 
@@ -319,8 +340,8 @@ export default function App() {
     React.createElement("div",{className:"app"},
       React.createElement("div",{className:"pg"},
         page==="home"       && React.createElement(HomePage,     {go:go,tests:tests}),
-        page==="book"       && React.createElement(BookPage,     {go:go,bks:bks,setBks:setBks,stus:stus,setStus:setStus,blkd:blkd}),
-        page==="mybookings" && React.createElement(MyBksPage,    {bks:bks,setBks:setBks,setBksRaw:setBksRaw}),
+        page==="book"       && React.createElement(BookPage,     {go:go,bks:bks,stus:stus,addBooking:addBooking,addStudent:addStudent,blkd:blkd}),
+        page==="mybookings" && React.createElement(MyBksPage,    {bks:bks,setBksRaw:setBksRaw}),
         page==="progress"   && React.createElement(ProgPage,     {stus:stus,bks:bks}),
         page==="reviews"    && React.createElement(RevPage,      {tests:tests}),
         page==="contact"    && React.createElement(ContactPage,  {go:go}),
@@ -582,7 +603,7 @@ function HomePage(props) {
     ),
     React.createElement("div",{className:"wrap",style:{padding:"20px 0 0"}},
       React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14}},
-        React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:20,fontWeight:800,color:NV}},""),
+        React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:20,fontWeight:800,color:NV}},"Google Reviews"),
         React.createElement("a",{href:"https://www.google.com/search?hl=en-GB&gl=uk&q=Steer+Assist+Driving+School&ludocid=6497258942805452546&lsig=AB86z5U4Nbz0nnmDGMO1qd9uc-f9#",target:"_blank",rel:"noopener noreferrer",style:{fontSize:13,color:B,fontWeight:700,textDecoration:"none"}},"See all")
       ),
       React.createElement(ElfsightWidget,null)
@@ -618,13 +639,14 @@ function HomePage(props) {
 }
 
 function BookPage(props) {
-  var go=props.go,bks=props.bks,setBks=props.setBks,stus=props.stus,setStus=props.setStus,blkd=props.blkd;
+  var go=props.go,bks=props.bks,stus=props.stus,addBooking=props.addBooking,addStudent=props.addStudent,blkd=props.blkd;
   var r1=useState(1); var step=r1[0]; var setStep=r1[1];
   var r2=useState({name:"",email:"",phone:"",notes:""}); var form=r2[0]; var setForm=r2[1];
   var r3=useState([]); var slots=r3[0]; var setSlots=r3[1];
   var r4=useState(tod()); var anchor=r4[0]; var setAnchor=r4[1];
   var r5=useState(60); var dur=r5[0]; var setDur=r5[1];
   var r6=useState({}); var errs=r6[0]; var setErrs=r6[1];
+  var r7=useState(false); var submitting=r7[0]; var setSubmitting=r7[1];
   var txRef=useRef(null);
   var wk=wkOf(anchor);
   function isBl(d,h){ return blkd.some(function(b){ return b.date===d&&(b.allDay||b.hour===h); }); }
@@ -635,33 +657,40 @@ function BookPage(props) {
   function onTS(e){ txRef.current=e.touches[0].clientX; }
   function onTE(e){ if(txRef.current===null) return; var diff=txRef.current-e.changedTouches[0].clientX; if(Math.abs(diff)>50){ diff>0?setAnchor(addD(wk[0],7)):setAnchor(addD(wk[0],-7)); } txRef.current=null; }
   function validate(){ var e={}; if(!form.name.trim()) e.name="Required"; if(!/\S+@\S+\.\S+/.test(form.email)) e.email="Valid email required"; if(!form.phone.trim()) e.phone="Required"; setErrs(e); return Object.keys(e).length===0; }
+
   async function confirm(){
-    if(step===5) return;
-    setStep(5);
-    var stCurrent=stus.find(function(s){ return s.email.toLowerCase()===form.email.toLowerCase(); });
-    if(!stCurrent){
-      stCurrent={id:uid(),name:form.name,email:form.email,phone:form.phone,enrolled:tod(),progress:Object.fromEntries(TOPICS.map(function(t){ return [t,false]; })),examReady:false,examDate:null,examResult:null};
-      await sbUpsert("students",{id:stCurrent.id,name:stCurrent.name,email:stCurrent.email,phone:stCurrent.phone,enrolled:stCurrent.enrolled,progress:stCurrent.progress,exam_ready:stCurrent.examReady,exam_date:stCurrent.examDate,exam_result:stCurrent.examResult});
+    if(submitting) return;
+    setSubmitting(true);
+    try {
+      var slotsCopy=[...slots];
+      // Find or create student
+      var stCurrent=stus.find(function(s){ return s.email.toLowerCase()===form.email.toLowerCase(); });
+      if(!stCurrent){
+        stCurrent={id:uid(),name:form.name,email:form.email,phone:form.phone,enrolled:tod(),progress:Object.fromEntries(TOPICS.map(function(t){ return [t,false]; })),examReady:false,examDate:null,examResult:null};
+        await addStudent(stCurrent);
+      }
+      // Add bookings one at a time
+      for(var bi=0;bi<slotsCopy.length;bi++){
+        var sl=slotsCopy[bi];
+        var newBk={id:uid(),sid:stCurrent.id,sName:form.name,sEmail:form.email,sPhone:form.phone,date:sl.date,hour:sl.hour,dur:sl.dur,status:"confirmed",notes:form.notes};
+        await addBooking(newBk);
+      }
+      // Send confirmation email
+      try{
+        await fetch("https://api.emailjs.com/api/v1.0/email/send",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({service_id:EJS_SVC,template_id:"template_vqz1p1b",user_id:EJS_KEY,template_params:{student_name:form.name,student_email:form.email,lesson_date:slotsCopy.map(function(sl){ return fmtD(sl.date)+" at "+fmtT(sl.hour); }).join(", "),lesson_time:fmtT(slotsCopy[0].hour),pickup_location:form.notes||"To be confirmed"}})});
+      }catch(emailErr){ console.log("Email error",emailErr); }
+      setStep(4);
+    } catch(err){
+      console.log("Booking error",err);
+      setSubmitting(false);
     }
-    var slotsCopy=[...slots];
-    var newBks=slotsCopy.map(function(sl){ return {id:uid(),sid:stCurrent.id,sName:form.name,sEmail:form.email,sPhone:form.phone,date:sl.date,hour:sl.hour,dur:sl.dur,status:"confirmed",notes:form.notes}; });
-    for(var bi=0;bi<newBks.length;bi++){
-      var nb=newBks[bi];
-      await sbUpsert("bookings",{id:nb.id,sid:nb.sid,s_name:nb.sName,s_email:nb.sEmail,s_phone:nb.sPhone,date:nb.date,hour:nb.hour,dur:nb.dur,status:nb.status,notes:nb.notes});
-    }
-    setBksRaw([...bks,...newBks]);
-    setStusRaw(function(prev){ return prev.find(function(s){ return s.email.toLowerCase()===form.email.toLowerCase(); })?prev:[...prev,stCurrent]; });
-    try{
-      var emailData={service_id:EJS_SVC,template_id:"template_vqz1p1b",user_id:EJS_KEY,template_params:{student_name:form.name,student_email:form.email,lesson_date:slotsCopy.map(function(sl){ return fmtD(sl.date)+" at "+fmtT(sl.hour); }).join(", "),lesson_time:fmtT(slotsCopy[0].hour),pickup_location:form.notes||"To be confirmed"}};
-      await fetch("https://api.emailjs.com/api/v1.0/email/send",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(emailData)});
-    }catch(e){ console.log("Email error",e); }
-    setStep(4);
   }
+
   function Hdr(){ return React.createElement("div",{style:{background:"linear-gradient(160deg,"+NV+","+BL+")",padding:"20px 20px 16px",color:"#fff"}},React.createElement("div",{className:"wrap",style:{display:"flex",alignItems:"center",gap:12,marginBottom:16}},React.createElement(Logo,{size:38}),React.createElement("div",null,React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:18,fontWeight:800}},"Book a Lesson"),React.createElement("div",{style:{fontSize:11,opacity:0.65}},"Step "+Math.min(step,3)+" of 3"))),React.createElement("div",{className:"wrap",style:{display:"flex",gap:6}},["Details","Pick Slots","Confirm"].map(function(s,i){ return React.createElement("div",{key:s,style:{flex:1}},React.createElement("div",{style:{height:3,borderRadius:4,background:step>i+1?"#fff":step===i+1?"rgba(255,255,255,0.8)":"rgba(255,255,255,0.25)",transition:"all 0.3s"}}),React.createElement("div",{style:{fontSize:10,color:step>=i+1?"rgba(255,255,255,0.8)":"rgba(255,255,255,0.35)",marginTop:4,fontWeight:600}},s)); }))); }
   if(step===1) return React.createElement("div",null,React.createElement(Hdr),React.createElement("div",{style:{padding:16},className:"wrap"},React.createElement(Crd,{style:{margin:0}},React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:18,fontWeight:800,color:NV,marginBottom:4}},"Your Details"),React.createElement("div",{style:{fontSize:13,color:SL,marginBottom:20}},"We will use these to confirm your booking"),[["name","Full Name","text","John Smith"],["email","Email","email","john@example.com"],["phone","Phone","tel","0412 345 678"]].map(function(row){ var k=row[0],label=row[1],type=row[2],ph=row[3]; return React.createElement("div",{key:k,style:{marginBottom:14}},React.createElement(Lbl,null,label),React.createElement(Inp,{value:form[k],onChange:function(e){ setForm(Object.assign({},form,{[k]:e.target.value})); },placeholder:ph,type:type,err:errs[k]}),errs[k]&&React.createElement("div",{style:{fontSize:12,color:RD,marginTop:3}},errs[k])); }),React.createElement("div",{style:{marginBottom:14}},React.createElement(Lbl,null,"Duration"),React.createElement("div",{style:{display:"flex",gap:8}},[60,90,120].map(function(d){ return React.createElement("button",{key:d,onClick:function(){ setDur(d); },style:{flex:1,padding:"11px 4px",borderRadius:12,border:"2px solid "+(dur===d?B:LN),background:dur===d?"#EFF6FF":"#F8FAFC",fontWeight:700,fontSize:14,cursor:"pointer",color:dur===d?B:SL}},d===60?"1 hr":d===90?"1.5 hr":"2 hr"); }))),React.createElement("div",{style:{marginBottom:20}},React.createElement(Lbl,null,"Notes (optional)"),React.createElement(Inp,{value:form.notes,onChange:function(e){ setForm(Object.assign({},form,{notes:e.target.value})); },placeholder:"Any special requirements...",multi:true})),React.createElement(Btn,{onClick:function(){ if(validate()) setStep(2); },full:true},"Next: Pick Your Slots"))));
   if(step===2) return React.createElement("div",{onTouchStart:onTS,onTouchEnd:onTE},React.createElement(Hdr),React.createElement("div",{style:{background:"#fff",padding:"12px 16px 0",boxShadow:"0 2px 8px rgba(0,0,0,0.04)"}},React.createElement("div",{className:"wrap",style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}},React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:15,fontWeight:800,color:NV}},new Date(wk[0]+"T12:00:00").toLocaleDateString("en-AU",{day:"numeric",month:"short"})+" - "+new Date(wk[6]+"T12:00:00").toLocaleDateString("en-AU",{day:"numeric",month:"short",year:"numeric"})),React.createElement("div",{style:{display:"flex",gap:6}},React.createElement("button",{onClick:function(){ setAnchor(addD(wk[0],-7)); },style:{background:"#F1F5F9",border:"none",borderRadius:8,padding:"6px 10px",cursor:"pointer"}},React.createElement(Ico,{n:"cL",sz:15,c:SL})),React.createElement("button",{onClick:function(){ setAnchor(addD(wk[0],7)); },style:{background:"#F1F5F9",border:"none",borderRadius:8,padding:"6px 10px",cursor:"pointer"}},React.createElement(Ico,{n:"cR",sz:15,c:SL})))),React.createElement("div",{style:{fontSize:11,color:MT,marginBottom:8}},"Swipe left or right to change week"),React.createElement("div",{style:{display:"flex",gap:8,paddingBottom:10}},[["#EFF6FF",B,"Available"],["#D1FAE5",GR,"Selected"],["#FEF3C7","#B45309","Booked"]].map(function(row){ return React.createElement("div",{key:row[2],style:{display:"flex",alignItems:"center",gap:4,fontSize:10}},React.createElement("div",{style:{width:12,height:12,borderRadius:3,background:row[0],border:"1.5px solid "+row[1]}}),React.createElement("span",{style:{color:MT,fontWeight:600}},row[2])); }))),React.createElement("div",{style:{overflowX:"auto",overflowY:"auto",maxHeight:"calc(100vh - 320px)",WebkitOverflowScrolling:"touch",background:"#fff"}},React.createElement("table",{style:{borderCollapse:"collapse",tableLayout:"fixed",width:"100%",minWidth:wk.length*54+62}},React.createElement("thead",null,React.createElement("tr",null,React.createElement("th",{style:{width:62,minWidth:62,position:"sticky",left:0,top:0,zIndex:10,background:"#fff",borderBottom:"2px solid "+LN,borderRight:"1px solid "+LN,padding:0}}),wk.map(function(d,di){ var isT=d===tod(),isPD=d<tod(); return React.createElement("th",{key:d,style:{width:54,position:"sticky",top:0,zIndex:5,background:isT?"#EFF6FF":"#fff",borderBottom:"2px solid "+(isT?B:LN),borderLeft:"1px solid "+LN,padding:"6px 2px",textAlign:"center"}},React.createElement("div",{style:{fontSize:10,fontWeight:700,color:isT?B:MT}},DNAMES[di]),React.createElement("div",{style:{width:28,height:28,borderRadius:"50%",background:isT?B:"transparent",color:isT?"#fff":isPD?MT:NV,display:"flex",alignItems:"center",justifyContent:"center",margin:"2px auto 1px",fontSize:14,fontWeight:800}},new Date(d+"T12:00:00").getDate()),React.createElement("div",{style:{fontSize:9,color:MT}},new Date(d+"T12:00:00").toLocaleDateString("en-AU",{month:"short"}))); }))),React.createElement("tbody",null,HRS.map(function(h){ return React.createElement("tr",{key:h},React.createElement("td",{style:{position:"sticky",left:0,zIndex:4,background:"#fff",borderRight:"1px solid "+LN,borderBottom:"1px solid #F8FAFC",padding:"0 6px 0 8px",width:62,minWidth:62,whiteSpace:"nowrap"}},React.createElement("span",{style:{fontSize:10,color:MT,fontWeight:700}},fmtT(h))),wk.map(function(d){ var bk=isBk(d,h),bl=isBl(d,h),sl=isSl(d,h),ps=isPst(d,h),un=bk||bl||ps; return React.createElement("td",{key:d,style:{padding:2,borderBottom:"1px solid #F8FAFC",borderLeft:"1px solid #F8FAFC",height:46,width:54}},React.createElement("button",{className:"slb",onClick:function(){ tog(d,h); },disabled:un,style:{width:"100%",height:"100%",minHeight:42,borderRadius:8,border:sl?"2px solid "+GR:"none",cursor:un?"default":"pointer",background:sl?"#D1FAE5":bk?"#FEF3C7":bl?"#FEE2E2":ps?"#F8FAFC":"#EFF6FF",display:"flex",alignItems:"center",justifyContent:"center",fontSize:15}},sl?React.createElement("span",{style:{color:GR,fontWeight:900}},"v"):bk?React.createElement("span",{style:{fontSize:10,color:"#B45309"}},"o"):bl?React.createElement("span",null,"X"):ps?null:React.createElement("span",{style:{color:"#93C5FD",fontSize:18}},"+"))); })); })))),React.createElement("div",{style:{padding:"12px 16px",background:OF}},slots.length>0?React.createElement(Crd,{style:{margin:0,border:"2px solid "+B}},React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}},React.createElement("span",{style:{fontWeight:800,fontSize:15,color:NV}},slots.length+" lesson"+(slots.length>1?"s":"")+" selected"),React.createElement("span",{style:{fontSize:12,color:SL}},dur+" min each")),React.createElement("div",{style:{maxHeight:100,overflowY:"auto",marginBottom:12}},[...slots].sort(function(a,b){ return a.date.localeCompare(b.date)||a.hour-b.hour; }).map(function(s){ return React.createElement("div",{key:s.date+s.hour,style:{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"5px 0",borderBottom:"1px solid "+LN}},React.createElement("span",{style:{fontSize:13,color:NV,fontWeight:600}},new Date(s.date+"T12:00:00").toLocaleDateString("en-AU",{weekday:"short",day:"numeric",month:"short"})+" at "+fmtT(s.hour)),React.createElement("button",{onClick:function(){ setSlots(function(p){ return p.filter(function(x){ return !(x.date===s.date&&x.hour===s.hour); }); }); },style:{background:"#FEE2E2",border:"none",borderRadius:6,padding:"4px 7px",cursor:"pointer"}},React.createElement(Ico,{n:"x",sz:12,c:RD}))); })),React.createElement("div",{style:{display:"flex",gap:8}},React.createElement(Btn,{onClick:function(){ setStep(1); },v:"outline"},"Back"),React.createElement(Btn,{onClick:function(){ setStep(3); },full:true},"Review Booking"))):React.createElement(Btn,{onClick:function(){ setStep(1); },v:"outline",full:true},"Back to Details")));
-  if(step===3) return React.createElement("div",null,React.createElement(Hdr),React.createElement("div",{style:{padding:16},className:"wrap"},React.createElement(Crd,{style:{margin:0}},React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:18,fontWeight:800,color:NV,marginBottom:16}},"Confirm Booking"),React.createElement("div",{style:{background:OF,borderRadius:14,padding:16,marginBottom:14}},React.createElement("div",{style:{display:"flex",gap:10,marginBottom:12}},React.createElement("div",{style:{width:40,height:40,borderRadius:10,background:B+"20",display:"flex",alignItems:"center",justifyContent:"center"}},React.createElement(Ico,{n:"user",sz:18,c:B})),React.createElement("div",null,React.createElement("div",{style:{fontWeight:700,fontSize:15,color:NV}},form.name),React.createElement("div",{style:{fontSize:12,color:SL}},form.email))),React.createElement("div",{style:{height:1,background:LN,marginBottom:12}}),React.createElement("div",{style:{fontWeight:700,fontSize:13,color:NV,marginBottom:8}},slots.length+" Lesson"+(slots.length>1?"s":"")), [...slots].sort(function(a,b){ return a.date.localeCompare(b.date); }).map(function(s){ return React.createElement("div",{key:s.date+s.hour,style:{fontSize:13,color:SL,paddingBottom:4}},fmtD(s.date)+" at "+fmtT(s.hour)+" ("+s.dur+" min)"); })),React.createElement("div",{style:{background:"#FEF3C7",borderRadius:12,padding:12,marginBottom:16,fontSize:13,color:"#92400E"}},"Confirmation will be sent to "+form.email),React.createElement("div",{style:{display:"flex",gap:8}},React.createElement(Btn,{onClick:function(){ setStep(2); },v:"outline"},"Back"),React.createElement(Btn,{onClick:confirm,v:"green",full:true},step===5?"Processing...":"Confirm All")))));
-  return React.createElement("div",null,React.createElement(Hdr),React.createElement("div",{style:{padding:16},className:"wrap"},React.createElement(Crd,{style:{margin:0,textAlign:"center",padding:32}},React.createElement("div",{style:{fontSize:60,marginBottom:16}},"\uD83C\uDF89"),React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:22,fontWeight:800,color:NV,marginBottom:8}},"You are Booked!"),React.createElement("div",{style:{fontSize:14,color:SL,marginBottom:24,lineHeight:1.6}},slots.length+" lesson"+(slots.length>1?"s":"")+" confirmed for "+form.name+"."),React.createElement("div",{style:{display:"flex",flexDirection:"column",gap:10}},React.createElement(Btn,{onClick:function(){ setStep(1); setForm({name:"",email:"",phone:"",notes:""}); setSlots([]); },full:true},"Book More"),React.createElement(Btn,{onClick:function(){ go("mybookings"); },v:"outline",full:true},"View My Bookings")))));
+  if(step===3) return React.createElement("div",null,React.createElement(Hdr),React.createElement("div",{style:{padding:16},className:"wrap"},React.createElement(Crd,{style:{margin:0}},React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:18,fontWeight:800,color:NV,marginBottom:16}},"Confirm Booking"),React.createElement("div",{style:{background:OF,borderRadius:14,padding:16,marginBottom:14}},React.createElement("div",{style:{display:"flex",gap:10,marginBottom:12}},React.createElement("div",{style:{width:40,height:40,borderRadius:10,background:B+"20",display:"flex",alignItems:"center",justifyContent:"center"}},React.createElement(Ico,{n:"user",sz:18,c:B})),React.createElement("div",null,React.createElement("div",{style:{fontWeight:700,fontSize:15,color:NV}},form.name),React.createElement("div",{style:{fontSize:12,color:SL}},form.email))),React.createElement("div",{style:{height:1,background:LN,marginBottom:12}}),React.createElement("div",{style:{fontWeight:700,fontSize:13,color:NV,marginBottom:8}},slots.length+" Lesson"+(slots.length>1?"s":"")), [...slots].sort(function(a,b){ return a.date.localeCompare(b.date); }).map(function(s){ return React.createElement("div",{key:s.date+s.hour,style:{fontSize:13,color:SL,paddingBottom:4}},fmtD(s.date)+" at "+fmtT(s.hour)+" ("+s.dur+" min)"); })),React.createElement("div",{style:{background:"#FEF3C7",borderRadius:12,padding:12,marginBottom:16,fontSize:13,color:"#92400E"}},"Confirmation will be sent to "+form.email),React.createElement("div",{style:{display:"flex",gap:8}},React.createElement(Btn,{onClick:function(){ setStep(2); },v:"outline"},"Back"),React.createElement(Btn,{onClick:confirm,v:"green",full:true,disabled:submitting},submitting?"Processing...":"Confirm All")))));
+  return React.createElement("div",null,React.createElement(Hdr),React.createElement("div",{style:{padding:16},className:"wrap"},React.createElement(Crd,{style:{margin:0,textAlign:"center",padding:32}},React.createElement("div",{style:{fontSize:60,marginBottom:16}},"\uD83C\uDF89"),React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:22,fontWeight:800,color:NV,marginBottom:8}},"You are Booked!"),React.createElement("div",{style:{fontSize:14,color:SL,marginBottom:24,lineHeight:1.6}},slots.length+" lesson"+(slots.length>1?"s":"")+" confirmed for "+form.name+"."),React.createElement("div",{style:{display:"flex",flexDirection:"column",gap:10}},React.createElement(Btn,{onClick:function(){ setStep(1); setForm({name:"",email:"",phone:"",notes:""}); setSlots([]); setSubmitting(false); },full:true},"Book More"),React.createElement(Btn,{onClick:function(){ go("mybookings"); },v:"outline",full:true},"View My Bookings")))));
 }
 
 function MyBksPage(props) {
@@ -726,20 +755,6 @@ function ProgPage(props) {
   );
 }
 
-function ElfsightWidget() {
-  useEffect(function(){
-    if(!document.querySelector('script[src="https://elfsightcdn.com/platform.js"]')){
-      var s=document.createElement("script");
-      s.src="https://elfsightcdn.com/platform.js";
-      s.async=true;
-      document.head.appendChild(s);
-    } else if(window.elfsight) {
-      window.elfsight.reload();
-    }
-  },[]);
-  return React.createElement("div",{className:"elfsight-app-75168746-83f5-4ddb-92c4-98e957895492","data-elfsight-app-lazy":true});
-}
-
 function RevPage(props) {
   var tests=props.tests;
   return React.createElement("div",null,
@@ -752,9 +767,9 @@ function RevPage(props) {
       React.createElement("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(200px,1fr))",gap:10,marginBottom:20}},
         tests.map(function(t){ return React.createElement("div",{key:t.id,style:{background:"#fff",borderRadius:16,padding:14,boxShadow:"0 2px 10px rgba(0,0,0,0.05)"}},React.createElement("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:8}},React.createElement("div",{style:{width:32,height:32,borderRadius:"50%",background:"linear-gradient(135deg,"+B+","+NV+")",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontWeight:800,fontSize:13,flexShrink:0}},t.name[0]),React.createElement("div",{style:{fontSize:12,fontWeight:700,color:NV}},t.name)),React.createElement(Stars,{n:t.stars,size:12}),React.createElement("p",{style:{fontSize:12,color:SL,lineHeight:1.5,fontStyle:"italic",marginTop:6}},'"'+(t.text.length>80?t.text.slice(0,80)+"...":t.text)+'"')); })
       ),
-      React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:18,fontWeight:800,color:NV,marginBottom:5}},""),
+      React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:18,fontWeight:800,color:NV,marginBottom:12}},"Google Reviews"),
       React.createElement(ElfsightWidget,null),
-      React.createElement("div",{style:{display:"flex",gap:8,marginTop:4}},
+      React.createElement("div",{style:{display:"flex",gap:8,marginTop:16}},
         React.createElement(SBtn,{href:IG},React.createElement(IgIco,{sz:15})," Instagram"),
         React.createElement(SBtn,{href:FB},React.createElement(FbIco,{sz:15})," Facebook"),
         React.createElement(SBtn,{href:WA},React.createElement(WaIco,{sz:15})," WhatsApp"),
@@ -919,17 +934,19 @@ function AchvPage(props) {
     React.createElement("div",{style:{background:"linear-gradient(160deg,"+NV+","+BL+")",padding:"20px 20px 24px",color:"#fff"}},React.createElement("div",{className:"wrap",style:{display:"flex",justifyContent:"space-between",alignItems:"center"}},React.createElement("div",null,React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:18,fontWeight:800}},"Achievements"),React.createElement("div",{style:{fontSize:11,opacity:0.65}},"Manage testimonials")),React.createElement("button",{onClick:function(){ setShowForm(!showForm); },style:{display:"flex",alignItems:"center",gap:6,padding:"8px 14px",background:"linear-gradient(135deg,"+GD+","+AM+")",border:"none",borderRadius:10,fontWeight:700,fontSize:12,color:NV,cursor:"pointer"}},React.createElement(Ico,{n:"plus",sz:13,c:NV})," Add"))),
     React.createElement("div",{style:{display:"flex",gap:6,padding:"12px 16px 0",borderBottom:"1px solid "+LN,background:"#fff"},className:"wrap"},
       [["testimonials","Testimonials"],["google","Google Reviews"]].map(function(row){ return React.createElement("button",{key:row[0],onClick:function(){ setTab(row[0]); },style:{padding:"10px 20px",borderRadius:"10px 10px 0 0",border:"none",cursor:"pointer",fontWeight:700,fontSize:13,background:tab===row[0]?B:"transparent",color:tab===row[0]?"#fff":SL}},row[1]); })
-      ),
-      React.createElement("div",{style:{padding:16},className:"wrap"},
+    ),
+    React.createElement("div",{style:{padding:16},className:"wrap"},
       tab==="google"&&React.createElement("div",{style:{marginTop:8}},
         React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:16,fontWeight:800,color:NV,marginBottom:16}},"Live Google Reviews"),
         React.createElement(ElfsightWidget,null)
       ),
       tab==="testimonials"&&React.createElement("div",null,
-      showForm&&React.createElement(Crd,{style:{marginBottom:14}},React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:16,fontWeight:800,color:NV,marginBottom:14}},"New Testimonial"),[["name","Student Name","John Smith"],["text","Testimonial","What did they say?"]].map(function(row){ var k=row[0],l=row[1],ph=row[2]; return React.createElement("div",{key:k,style:{marginBottom:12}},React.createElement(Lbl,null,l),React.createElement(Inp,{value:form[k],onChange:function(e){ setForm(Object.assign({},form,{[k]:e.target.value})); },placeholder:ph,multi:k==="text"})); }),React.createElement("div",{style:{marginBottom:14}},React.createElement(Lbl,null,"Stars"),React.createElement("div",{style:{display:"flex",gap:6}},[1,2,3,4,5].map(function(n){ return React.createElement("button",{key:n,onClick:function(){ setForm(Object.assign({},form,{stars:n})); },style:{fontSize:26,background:"none",border:"none",cursor:"pointer",opacity:n<=form.stars?1:0.25,color:GD,padding:2}},"\u2605"); }))),React.createElement(Btn,{onClick:add,v:"green",full:true},"Save")),
-      React.createElement("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:14}},[[tests.length,"Testimonials",GD],[GREV.length,"Google Reviews","#4285F4"]].map(function(row){ return React.createElement("div",{key:row[1],style:{background:"#fff",borderRadius:14,padding:14,textAlign:"center",boxShadow:"0 2px 10px rgba(0,0,0,0.05)"}},React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:24,fontWeight:800,color:row[2]}},row[0]),React.createElement("div",{style:{fontSize:12,color:MT}},row[1])); })),
-      React.createElement("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(280px,1fr))",gap:12}},
-        tests.map(function(t){ return React.createElement(Crd,{key:t.id,style:{margin:0}},React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"flex-start"}},React.createElement("div",{style:{display:"flex",gap:10,flex:1}},React.createElement("div",{style:{width:38,height:38,borderRadius:"50%",background:"linear-gradient(135deg,"+B+","+NV+")",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontWeight:800,fontSize:15,flexShrink:0}},t.name[0]),React.createElement("div",{style:{flex:1}},React.createElement("div",{style:{fontWeight:700,fontSize:14,color:NV}},t.name),React.createElement(Stars,{n:t.stars,size:13}),React.createElement("p",{style:{fontSize:12,color:SL,marginTop:5,fontStyle:"italic",lineHeight:1.5}},'"'+t.text+'"'),React.createElement("div",{style:{fontSize:10,color:MT,marginTop:4}},t.date))),React.createElement("button",{onClick:function(){ setTests(tests.filter(function(x){ return x.id!==t.id; })); },style:{background:"#FEE2E2",border:"none",borderRadius:8,padding:"6px 8px",cursor:"pointer",marginLeft:8}},React.createElement(Ico,{n:"trash",sz:13,c:RD})))); })
+        showForm&&React.createElement(Crd,{style:{marginBottom:14}},React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:16,fontWeight:800,color:NV,marginBottom:14}},"New Testimonial"),[["name","Student Name","John Smith"],["text","Testimonial","What did they say?"]].map(function(row){ var k=row[0],l=row[1],ph=row[2]; return React.createElement("div",{key:k,style:{marginBottom:12}},React.createElement(Lbl,null,l),React.createElement(Inp,{value:form[k],onChange:function(e){ setForm(Object.assign({},form,{[k]:e.target.value})); },placeholder:ph,multi:k==="text"})); }),React.createElement("div",{style:{marginBottom:14}},React.createElement(Lbl,null,"Stars"),React.createElement("div",{style:{display:"flex",gap:6}},[1,2,3,4,5].map(function(n){ return React.createElement("button",{key:n,onClick:function(){ setForm(Object.assign({},form,{stars:n})); },style:{fontSize:26,background:"none",border:"none",cursor:"pointer",opacity:n<=form.stars?1:0.25,color:GD,padding:2}},"\u2605"); }))),React.createElement(Btn,{onClick:add,v:"green",full:true},"Save")),
+        React.createElement("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:14}},[[tests.length,"Testimonials",GD],[GREV.length,"Google Reviews","#4285F4"]].map(function(row){ return React.createElement("div",{key:row[1],style:{background:"#fff",borderRadius:14,padding:14,textAlign:"center",boxShadow:"0 2px 10px rgba(0,0,0,0.05)"}},React.createElement("div",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:24,fontWeight:800,color:row[2]}},row[0]),React.createElement("div",{style:{fontSize:12,color:MT}},row[1])); })),
+        React.createElement("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(280px,1fr))",gap:12}},
+          tests.map(function(t){ return React.createElement(Crd,{key:t.id,style:{margin:0}},React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"flex-start"}},React.createElement("div",{style:{display:"flex",gap:10,flex:1}},React.createElement("div",{style:{width:38,height:38,borderRadius:"50%",background:"linear-gradient(135deg,"+B+","+NV+")",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontWeight:800,fontSize:15,flexShrink:0}},t.name[0]),React.createElement("div",{style:{flex:1}},React.createElement("div",{style:{fontWeight:700,fontSize:14,color:NV}},t.name),React.createElement(Stars,{n:t.stars,size:13}),React.createElement("p",{style:{fontSize:12,color:SL,marginTop:5,fontStyle:"italic",lineHeight:1.5}},'"'+t.text+'"'),React.createElement("div",{style:{fontSize:10,color:MT,marginTop:4}},t.date))),React.createElement("button",{onClick:function(){ setTests(tests.filter(function(x){ return x.id!==t.id; })); },style:{background:"#FEE2E2",border:"none",borderRadius:8,padding:"6px 8px",cursor:"pointer",marginLeft:8}},React.createElement(Ico,{n:"trash",sz:13,c:RD})))); })
+        )
       )
-    )));
+    )
+  );
 }
