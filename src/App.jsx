@@ -677,7 +677,7 @@ function BookPage(props) {
       }
       // Send confirmation email
       try{
-        await fetch("https://api.emailjs.com/api/v1.0/email/send",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({service_id:EJS_SVC,template_id:"template_vqz1p1b",user_id:EJS_KEY,template_params:{student_name:form.name,student_email:form.email,lesson_date:slotsCopy.map(function(sl){ return fmtD(sl.date)+" at "+fmtT(sl.hour); }).join(", "),lesson_time:fmtT(slotsCopy[0].hour),pickup_location:form.notes||"To be confirmed"}})});
+        await fetch("https://api.emailjs.com/api/v1.0/email/send",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({service_id:EJS_SVC,template_id:"template_1eaij5q",user_id:EJS_KEY,template_params:{student_name:form.name,student_email:form.email,lesson_date:slotsCopy.map(function(sl){ return fmtD(sl.date)+" at "+fmtT(sl.hour); }).join(", "),lesson_time:fmtT(slotsCopy[0].hour),pickup_location:form.notes||"To be confirmed"}})});
       }catch(emailErr){ console.log("Email error",emailErr); }
       setStep(4);
     } catch(err){
