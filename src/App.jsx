@@ -680,7 +680,7 @@ function BookPage(props) {
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify({
           service_id:EJS_SVC,
-          template_id:"template_1eaij5q",
+          template_id:"template_rb0zdba",
           user_id:EJS_KEY,
           template_params:{
             student_name:form.name,
